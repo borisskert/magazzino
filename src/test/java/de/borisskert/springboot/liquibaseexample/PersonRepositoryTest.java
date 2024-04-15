@@ -3,6 +3,7 @@ package de.borisskert.springboot.liquibaseexample;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
 
@@ -12,6 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Tests the {@link PersonRepository} against the h2 database.
  */
 @SpringBootTest
+@ActiveProfiles("test")
 class PersonRepositoryTest {
 
     @Autowired

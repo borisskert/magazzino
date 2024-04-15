@@ -1,0 +1,3 @@
+databaseChangeLog:
+  - include:
+      file: classpath:db/changelog/changesets/1712826111-create_table_person.yml

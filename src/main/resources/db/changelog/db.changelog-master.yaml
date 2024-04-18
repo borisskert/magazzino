@@ -1,3 +1,5 @@
 databaseChangeLog:
   - include:
-      file: classpath:db/changelog/changesets/1712826111-create_table_person.yml
+      file: classpath:db/changelog/changesets/1712826111-create-table-person.yml
+  - include:
+      file: classpath:db/changelog/changesets/1713451028-create-table-products.yml

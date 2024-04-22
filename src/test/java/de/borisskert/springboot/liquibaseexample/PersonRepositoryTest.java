@@ -1,5 +1,6 @@
 package de.borisskert.springboot.liquibaseexample;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -50,4 +51,10 @@ class PersonRepositoryTest {
         assertThat(foundPerson.getRole()).isEqualTo(Person.Role.USER);
         assertThat(foundPerson.getBirthdate()).isEqualTo(LocalDate.parse("1980-11-15"));
     }
+
+    @AfterEach
+    void cleanup() throws Exception {
+        personRepository.deleteAll();
+    }
+
 }

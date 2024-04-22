@@ -1,0 +1,62 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1713451331
+      author: bs
+      changes:
+        - createTable:
+            tableName: shopping_cart
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+
+              - column:
+                  name: checked_out
+                  type: boolean
+                  constraints:
+                    nullable: false
+                    
+              - column:
+                  name: customer_id
+                  type: bigint
+                  constraints:
+                      nullable: false
+                      foreignKeyName: fk_shopping_cart_customer_id
+                      references: person(id)
+
+        - createTable: 
+            tableName: shopping_cart_item
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+
+              - column:
+                  name: quantity
+                  type: int
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: product_id
+                  type: varchar(36)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_shopping_cart_item_product_id
+                    references: product(id)
+                    
+              - column:
+                  name: shopping_cart_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_shopping_cart_item_shopping_cart_id
+                    references: shopping_cart(id)

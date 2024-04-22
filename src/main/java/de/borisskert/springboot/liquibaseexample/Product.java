@@ -26,6 +26,11 @@ public class Product {
     public void setId(UUID id) {
         this.id = id;
     }
+    
+    public Product withRandomId() {
+        this.id = UUID.randomUUID();
+        return this;
+    }
 
     public String getNumber() {
         return number;

@@ -1,14 +1,17 @@
 package de.borisskert.springboot.liquibaseexample;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+@ActiveProfiles("test")
 class ProductRepositoryTest {
 
     @Autowired
@@ -39,5 +42,10 @@ class ProductRepositoryTest {
         assertEquals(product.getName(), foundProduct.getName());
         assertEquals(product.getDescription(), foundProduct.getDescription());
         assertEquals(product.getPrice(), foundProduct.getPrice());
+    }
+
+    @AfterEach
+    void cleanup() throws Exception {
+        productRepository.deleteAll();
     }
 }

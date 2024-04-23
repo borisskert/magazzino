@@ -2,8 +2,6 @@ package de.borisskert.springboot.liquibaseexample;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 @Table(name = "shopping_cart")
 public class ShoppingCart {
@@ -14,16 +12,12 @@ public class ShoppingCart {
 
     @Column(unique = true, nullable = false)
     private Long customerId;
-    
+
     @Column(nullable = false)
     private Boolean checkedOut;
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Long getCustomerId() {

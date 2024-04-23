@@ -6,9 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.util.UUID;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -20,7 +19,6 @@ class ProductRepositoryTest {
     @Test
     void shouldCreateProduct() throws Exception {
         Product product = new Product();
-        product.setId(UUID.fromString("c591b610-283e-47f6-9258-1189cd101fbc"));
         product.setNumber("P-123456");
         product.setName("My Test Product 1");
         product.setDescription("This is a test product");

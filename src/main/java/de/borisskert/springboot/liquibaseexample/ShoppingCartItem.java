@@ -11,21 +11,17 @@ public class ShoppingCartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    @Column(name="shopping_cart_id", nullable=false)
+
+    @Column(name = "shopping_cart_id", nullable = false)
     private Long shoppingCartId;
 
-    @Column(name = "product_id", nullable = false)
+    @Column(name = "product_id", nullable = false, columnDefinition = "VARCHAR(36)")
     private UUID productId;
-    
+
     private Long quantity;
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Long getShoppingCartId() {

@@ -34,7 +34,7 @@ public class ShoppingCartItemRepositoryTest {
     private Person person;
     private ShoppingCart shoppingCart;
     private List<Product> products;
-    
+
     @BeforeEach
     void setup() throws Exception {
         person = setupPerson();
@@ -44,30 +44,37 @@ public class ShoppingCartItemRepositoryTest {
 
     @Test
     void shouldSaveCartItems() throws Exception {
-        Product product1 = products.get(0);
+        Product product1 = products.getFirst();
         ShoppingCartItem item1 = new ShoppingCartItem();
         item1.setShoppingCartId(shoppingCart.getId());
         item1.setProductId(product1.getId());
         item1.setQuantity(2L);
 
-        Product product2 = products.get(1);
+        Product product2 = products.getLast();
         ShoppingCartItem item2 = new ShoppingCartItem();
         item2.setShoppingCartId(shoppingCart.getId());
         item2.setProductId(product2.getId());
         item2.setQuantity(1L);
 
-        shoppingCartItemRepository.saveAll(List.of(
+        List<ShoppingCartItem> savedItems = shoppingCartItemRepository.saveAll(List.of(
                 item1,
                 item2
         ));
         
+        assertThat(savedItems).hasSize(2);
+        assertThat(savedItems).extracting(ShoppingCartItem::getId).isNotNull();
+        assertThat(savedItems).extracting(ShoppingCartItem::getShoppingCartId).containsOnly(shoppingCart.getId());
+        assertThat(savedItems).extracting(ShoppingCartItem::getProductId).containsOnly(product1.getId(), product2.getId());
+        assertThat(savedItems).extracting(ShoppingCartItem::getQuantity).containsOnly(2L, 1L);
+
         List<ShoppingCartItem> items = shoppingCartItemRepository.findAll();
         assertThat(items).hasSize(2);
+        assertThat(items).extracting(ShoppingCartItem::getId).isNotNull();
         assertThat(items).extracting(ShoppingCartItem::getShoppingCartId).containsOnly(shoppingCart.getId());
         assertThat(items).extracting(ShoppingCartItem::getProductId).containsOnly(product1.getId(), product2.getId());
         assertThat(items).extracting(ShoppingCartItem::getQuantity).containsOnly(2L, 1L);
     }
-    
+
     @AfterEach
     void cleanup() throws Exception {
         shoppingCartItemRepository.deleteAll();
@@ -97,13 +104,13 @@ public class ShoppingCartItemRepositoryTest {
     }
 
     private List<Product> setupProducts() {
-        Product product1 = new Product().withRandomId();
+        Product product1 = new Product();
         product1.setNumber("P-123456");
         product1.setName("My Test Product 1");
         product1.setDescription("This is a test product");
         product1.setPrice(123.45);
 
-        Product product2 = new Product().withRandomId();
+        Product product2 = new Product();
         product2.setNumber("P-123457");
         product2.setName("My Test Product 2");
         product2.setDescription("This is another test product");

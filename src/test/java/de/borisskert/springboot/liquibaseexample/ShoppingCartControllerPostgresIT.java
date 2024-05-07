@@ -9,7 +9,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
 @Testcontainers
-class ProductRepositoryPostgresIT extends ProductRepositoryTest {
+class ShoppingCartControllerPostgresIT extends ShoppingCartControllerTest {
 
     @Container
     public static PostgreSQLContainer<?> databaseContainer = new PostgreSQLContainer<>(

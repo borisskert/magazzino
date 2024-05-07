@@ -73,6 +73,6 @@ public class Person {
     }
 
     public enum Role {
-        ADMIN, USER
+        ADMIN, USER, CUSTOMER
     }
 }

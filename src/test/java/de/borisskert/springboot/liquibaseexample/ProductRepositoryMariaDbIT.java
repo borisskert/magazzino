@@ -10,6 +10,7 @@ import org.testcontainers.utility.DockerImageName;
 
 @Testcontainers
 class ProductRepositoryMariaDbIT extends ProductRepositoryTest {
+
     @Container
     public static MariaDBContainer<?> databaseContainer = new MariaDBContainer<>(
             DockerImageName.parse("mariadb:11.3")

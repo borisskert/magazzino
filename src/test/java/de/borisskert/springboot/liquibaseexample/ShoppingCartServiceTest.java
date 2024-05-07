@@ -16,7 +16,7 @@ import java.util.stream.StreamSupport;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 class ShoppingCartServiceTest {
@@ -47,10 +47,11 @@ class ShoppingCartServiceTest {
     void shouldCreateNewShoppingCartIfNotPresent() throws Exception {
         ShoppingCart shoppingCart = shoppingCartService.retrieveShoppingCart(person.getId());
 
-        assertNotNull(shoppingCart);
-        assertNotNull(shoppingCart.getId());
-        assertEquals(person.getId(), shoppingCart.getCustomerId());
-        assertFalse(shoppingCart.isCheckedOut());
+        assertThat(shoppingCart).isNotNull();
+        assertThat(shoppingCart.getId()).isNotNull();
+        assertThat(shoppingCart.getCustomer()).extracting(Person::getId).isEqualTo(person.getId());
+        assertThat(shoppingCart.isCheckedOut()).isFalse();
+        assertThat(shoppingCart.getItems()).isEmpty();
     }
 
     @Test
@@ -69,10 +70,10 @@ class ShoppingCartServiceTest {
 
         ShoppingCart shoppingCart = shoppingCartService.retrieveShoppingCart(person.getId());
 
-        assertNotNull(shoppingCart);
-        assertNotNull(shoppingCart.getId());
-        assertEquals(person.getId(), shoppingCart.getCustomerId());
-        assertFalse(shoppingCart.isCheckedOut());
+        assertThat(shoppingCart).isNotNull();
+        assertThat(shoppingCart.getId()).isNotNull();
+        assertThat(shoppingCart.getCustomer()).extracting(Person::getId).isEqualTo(person.getId());
+        assertThat(shoppingCart.isCheckedOut()).isFalse();
         assertThat(shoppingCart.getItems()).hasSize(1);
     }
 
@@ -105,6 +106,12 @@ class ShoppingCartServiceTest {
         assertThatThrownBy(() -> shoppingCartService.addItemToCart(
                 person.getId(), UUID.randomUUID(), 1L
         )).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void shouldThrowWhenTryingToGetCartForUnknownPerson() throws Exception {
+        assertThatThrownBy(() -> shoppingCartService.retrieveShoppingCart(Long.MAX_VALUE))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @AfterEach

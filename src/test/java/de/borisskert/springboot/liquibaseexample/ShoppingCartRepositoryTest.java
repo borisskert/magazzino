@@ -5,14 +5,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -34,45 +31,45 @@ class ShoppingCartRepositoryTest {
     @Test
     void shouldCreateEmptyShoppingCart() throws Exception {
         ShoppingCart shoppingCart = new ShoppingCart();
-        shoppingCart.setCustomerId(person.getId());
+        shoppingCart.setCustomer(person);
         shoppingCart.setCheckedOut(false);
 
         ShoppingCart savedShoppingCart = shoppingCartRepository.save(shoppingCart);
 
-        assertNotNull(savedShoppingCart);
-        assertNotNull(savedShoppingCart.getId());
-        assertEquals(shoppingCart.getCustomerId(), savedShoppingCart.getCustomerId());
-        assertEquals(shoppingCart.isCheckedOut(), savedShoppingCart.isCheckedOut());
+        assertThat(savedShoppingCart).isNotNull();
+        assertThat(savedShoppingCart.getId()).isNotNull();
+        assertThat(savedShoppingCart)
+                .extracting(ShoppingCart::getCustomer)
+                .extracting(Person::getId)
+                .isEqualTo(person.getId());
+        assertThat(savedShoppingCart.isCheckedOut()).isEqualTo(shoppingCart.isCheckedOut());
 
         ShoppingCart foundShoppingCart = shoppingCartRepository.findById(savedShoppingCart.getId()).orElseThrow();
-        assertNotNull(foundShoppingCart);
-        assertNotNull(foundShoppingCart.getId());
-        assertEquals(shoppingCart.getCustomerId(), foundShoppingCart.getCustomerId());
-        assertEquals(shoppingCart.isCheckedOut(), foundShoppingCart.isCheckedOut());
+
+        assertThat(foundShoppingCart).isNotNull();
+        assertThat(foundShoppingCart.getId()).isEqualTo(savedShoppingCart.getId());
+        assertThat(foundShoppingCart)
+                .extracting(ShoppingCart::getCustomer)
+                .extracting(Person::getId)
+                .isEqualTo(person.getId());
+        assertThat(foundShoppingCart.isCheckedOut()).isEqualTo(savedShoppingCart.isCheckedOut());
     }
 
     @Test
     void shouldCreateCheckedOutShoppingCart() throws Exception {
         ShoppingCart shoppingCart = new ShoppingCart();
-        shoppingCart.setCustomerId(person.getId());
+        shoppingCart.setCustomer(person);
         shoppingCart.setCheckedOut(true);
 
         ShoppingCart savedShoppingCart = shoppingCartRepository.save(shoppingCart);
 
-        assertNotNull(savedShoppingCart);
-        assertNotNull(savedShoppingCart.getId());
-        assertEquals(shoppingCart.getCustomerId(), savedShoppingCart.getCustomerId());
-        assertEquals(shoppingCart.isCheckedOut(), savedShoppingCart.isCheckedOut());
-    }
-
-    @Test
-    void shouldNotCreateShoppingCartForNotExistingPerson() throws Exception {
-        ShoppingCart shoppingCart = new ShoppingCart();
-        shoppingCart.setCustomerId(Long.MAX_VALUE);
-        shoppingCart.setCheckedOut(false);
-
-        assertThatThrownBy(() -> shoppingCartRepository.save(shoppingCart))
-                .isInstanceOf(DataIntegrityViolationException.class);
+        assertThat(savedShoppingCart).isNotNull();
+        assertThat(savedShoppingCart.getId()).isNotNull();
+        assertThat(savedShoppingCart)
+                .extracting(ShoppingCart::getCustomer)
+                .extracting(Person::getId)
+                .isEqualTo(person.getId());
+        assertThat(savedShoppingCart.isCheckedOut()).isEqualTo(shoppingCart.isCheckedOut());
     }
 
     @AfterEach

@@ -9,24 +9,30 @@ import java.util.UUID;
 @Service
 public class ShoppingCartService {
 
+    private final PersonRepository personRepository;
     private final ShoppingCartRepository shoppingCartRepository;
     private final ProductRepository productRepository;
 
     @Autowired
     public ShoppingCartService(
+            PersonRepository personRepository,
             ShoppingCartRepository shoppingCartRepository,
             ProductRepository productRepository
     ) {
+        this.personRepository = personRepository;
         this.shoppingCartRepository = shoppingCartRepository;
         this.productRepository = productRepository;
     }
 
     @Transactional
     public ShoppingCart retrieveShoppingCart(Long customerId) {
+        Person person = personRepository.findById(customerId)
+                .orElseThrow(() -> new IllegalArgumentException("Person not found: " + customerId));
+        
         return shoppingCartRepository.findByCustomerId(customerId)
                 .orElseGet(() -> {
                     ShoppingCart shoppingCart = new ShoppingCart();
-                    shoppingCart.setCustomerId(customerId);
+                    shoppingCart.setCustomer(person);
                     shoppingCart.setCheckedOut(false);
                     return shoppingCartRepository.save(shoppingCart);
                 });

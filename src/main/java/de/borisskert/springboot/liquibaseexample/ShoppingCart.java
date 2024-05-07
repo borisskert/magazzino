@@ -13,8 +13,9 @@ public class ShoppingCart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
-    private Long customerId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id", referencedColumnName = "id")
+    private Person customer;
 
     @Column(nullable = false)
     private Boolean checkedOut;
@@ -26,12 +27,12 @@ public class ShoppingCart {
         return id;
     }
 
-    public Long getCustomerId() {
-        return customerId;
+    public Person getCustomer() {
+        return customer;
     }
 
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
+    public void setCustomer(Person customer) {
+        this.customer = customer;
     }
 
     public Boolean isCheckedOut() {

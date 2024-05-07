@@ -10,10 +10,12 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Spliterator;
 import java.util.Spliterators;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -96,6 +98,13 @@ class ShoppingCartServiceTest {
         ShoppingCartItem item2 = items.getLast();
         assertEquals(products.getLast().getId(), item2.getProduct().getId());
         assertEquals(1L, item2.getQuantity());
+    }
+
+    @Test
+    void shouldThrowWhenTryingToAddUnknownProductToCart() throws Exception {
+        assertThatThrownBy(() -> shoppingCartService.addItemToCart(
+                person.getId(), UUID.randomUUID(), 1L
+        )).isInstanceOf(IllegalArgumentException.class);
     }
 
     @AfterEach

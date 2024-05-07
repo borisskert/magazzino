@@ -42,13 +42,13 @@ class ShoppingCartRepositoryTest {
         assertNotNull(savedShoppingCart);
         assertNotNull(savedShoppingCart.getId());
         assertEquals(shoppingCart.getCustomerId(), savedShoppingCart.getCustomerId());
-        assertEquals(shoppingCart.getCheckedOut(), savedShoppingCart.getCheckedOut());
+        assertEquals(shoppingCart.isCheckedOut(), savedShoppingCart.isCheckedOut());
 
         ShoppingCart foundShoppingCart = shoppingCartRepository.findById(savedShoppingCart.getId()).orElseThrow();
         assertNotNull(foundShoppingCart);
         assertNotNull(foundShoppingCart.getId());
         assertEquals(shoppingCart.getCustomerId(), foundShoppingCart.getCustomerId());
-        assertEquals(shoppingCart.getCheckedOut(), foundShoppingCart.getCheckedOut());
+        assertEquals(shoppingCart.isCheckedOut(), foundShoppingCart.isCheckedOut());
     }
 
     @Test
@@ -62,7 +62,7 @@ class ShoppingCartRepositoryTest {
         assertNotNull(savedShoppingCart);
         assertNotNull(savedShoppingCart.getId());
         assertEquals(shoppingCart.getCustomerId(), savedShoppingCart.getCustomerId());
-        assertEquals(shoppingCart.getCheckedOut(), savedShoppingCart.getCheckedOut());
+        assertEquals(shoppingCart.isCheckedOut(), savedShoppingCart.isCheckedOut());
     }
 
     @Test

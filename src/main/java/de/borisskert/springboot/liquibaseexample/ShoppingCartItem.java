@@ -12,11 +12,15 @@ public class ShoppingCartItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "shopping_cart_id", nullable = false)
-    private Long shoppingCartId;
+//    @Column(name = "shopping_cart_id", nullable = false)
+//    private Long shoppingCartId;
 
-    @Column(name = "product_id", nullable = false, columnDefinition = "VARCHAR(36)")
-    private UUID productId;
+    @ManyToOne
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    private Product product;
+
+    @ManyToOne
+    private ShoppingCart shoppingCart;
 
     private Long quantity;
 
@@ -24,20 +28,24 @@ public class ShoppingCartItem {
         return id;
     }
 
-    public Long getShoppingCartId() {
-        return shoppingCartId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setShoppingCartId(Long shoppingCartId) {
-        this.shoppingCartId = shoppingCartId;
+    public Product getProduct() {
+        return product;
     }
 
-    public UUID getProductId() {
-        return productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    public void setProductId(UUID productId) {
-        this.productId = productId;
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
+    }
+
+    public void setShoppingCart(ShoppingCart shoppingCart) {
+        this.shoppingCart = shoppingCart;
     }
 
     public Long getQuantity() {
@@ -46,5 +54,15 @@ public class ShoppingCartItem {
 
     public void setQuantity(Long quantity) {
         this.quantity = quantity;
+    }
+
+    public ShoppingCartItem withQuantity(long quantity) {
+        this.quantity = quantity;
+        return this;
+    }
+
+    public ShoppingCartItem withCart(ShoppingCart shoppingCart) {
+        this.shoppingCart = shoppingCart;
+        return this;
     }
 }

@@ -46,14 +46,18 @@ public class ShoppingCartItemRepositoryTest {
     void shouldSaveCartItems() throws Exception {
         Product product1 = products.getFirst();
         ShoppingCartItem item1 = new ShoppingCartItem();
-        item1.setShoppingCartId(shoppingCart.getId());
-        item1.setProductId(product1.getId());
+//        item1.setShoppingCartId(shoppingCart.getId());
+        item1.setShoppingCart(shoppingCart);
+//        item1.setProductId(product1.getId());
+        item1.setProduct(product1);
         item1.setQuantity(2L);
 
         Product product2 = products.getLast();
         ShoppingCartItem item2 = new ShoppingCartItem();
-        item2.setShoppingCartId(shoppingCart.getId());
-        item2.setProductId(product2.getId());
+        item2.setShoppingCart(shoppingCart);
+//        item2.setShoppingCartId(shoppingCart.getId());
+//        item2.setProductId(product2.getId());
+        item2.setProduct(product2);
         item2.setQuantity(1L);
 
         List<ShoppingCartItem> savedItems = shoppingCartItemRepository.saveAll(List.of(
@@ -63,16 +67,23 @@ public class ShoppingCartItemRepositoryTest {
         
         assertThat(savedItems).hasSize(2);
         assertThat(savedItems).extracting(ShoppingCartItem::getId).isNotNull();
-        assertThat(savedItems).extracting(ShoppingCartItem::getShoppingCartId).containsOnly(shoppingCart.getId());
-        assertThat(savedItems).extracting(ShoppingCartItem::getProductId).containsOnly(product1.getId(), product2.getId());
+//        assertThat(savedItems).extracting(ShoppingCartItem::getShoppingCartId).containsOnly(shoppingCart.getId());
+        assertThat(savedItems).extracting(ShoppingCartItem::getProduct).extracting(Product::getId).containsOnly(product1.getId(), product2.getId());
         assertThat(savedItems).extracting(ShoppingCartItem::getQuantity).containsOnly(2L, 1L);
 
         List<ShoppingCartItem> items = shoppingCartItemRepository.findAll();
         assertThat(items).hasSize(2);
         assertThat(items).extracting(ShoppingCartItem::getId).isNotNull();
-        assertThat(items).extracting(ShoppingCartItem::getShoppingCartId).containsOnly(shoppingCart.getId());
-        assertThat(items).extracting(ShoppingCartItem::getProductId).containsOnly(product1.getId(), product2.getId());
+//        assertThat(items).extracting(ShoppingCartItem::getShoppingCartId).containsOnly(shoppingCart.getId());
+//        assertThat(items).extracting(ShoppingCartItem::getProductId).containsOnly(product1.getId(), product2.getId());
+        assertThat(savedItems).extracting(ShoppingCartItem::getProduct).extracting(Product::getId).containsOnly(product1.getId(), product2.getId());
         assertThat(items).extracting(ShoppingCartItem::getQuantity).containsOnly(2L, 1L);
+        
+        shoppingCartRepository.findById(shoppingCart.getId())
+                .ifPresent(cart -> {
+                    assertThat(cart.getItems()).hasSize(2);
+                    assertThat(cart.getItems()).extracting(ShoppingCartItem::getId).containsOnly(item1.getId(), item2.getId());
+                });
     }
 
     @AfterEach

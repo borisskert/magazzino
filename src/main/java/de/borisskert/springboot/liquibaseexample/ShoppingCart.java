@@ -46,20 +46,6 @@ public class ShoppingCart {
         return items;
     }
 
-    //    public void addItem(UUID productId, Long quantity) {
-//        Map<UUID, ShoppingCartItem> itemsMap = items.stream()
-//                .collect(Collectors.toMap(ShoppingCartItem::getProductId, i -> i));
-//
-//        ShoppingCartItem existingItem = Optional.ofNullable(itemsMap.get(productId))
-////                .orElse(new ShoppingCartItem().withShoppingCartId(this.id).withProductId(productId).withQuantity(0L));
-//                .orElse(new ShoppingCartItem().withCart(this).withProductId(productId).withQuantity(0L));
-//        
-//        existingItem.setQuantity(existingItem.getQuantity() + quantity);
-//        itemsMap.put(productId, existingItem);
-//        
-//        // Resulting list has to be modifiable
-//        this.items = new ArrayList<>(itemsMap.values());
-//    }
     public void addItem(Product product, Long quantity) {
         ShoppingCartItem existingItem = items.stream()
                 .filter(i -> i.getProduct().getId().equals(product.getId()))

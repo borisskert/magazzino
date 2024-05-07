@@ -26,9 +26,6 @@ class ShoppingCartServiceTest {
     private ShoppingCartRepository shoppingCartRepository;
 
     @Autowired
-    private ShoppingCartItemRepository shoppingCartItemRepository;
-
-    @Autowired
     private PersonRepository personRepository;
 
     @Autowired
@@ -70,14 +67,11 @@ class ShoppingCartServiceTest {
 
         ShoppingCart shoppingCart = shoppingCartService.retrieveShoppingCart(person.getId());
 
-        List<ShoppingCartItem> items = shoppingCartItemRepository.findAll();
-
-        assertThat(items).hasSize(1);
-
         assertNotNull(shoppingCart);
         assertNotNull(shoppingCart.getId());
         assertEquals(person.getId(), shoppingCart.getCustomerId());
         assertFalse(shoppingCart.isCheckedOut());
+        assertThat(shoppingCart.getItems()).hasSize(1);
     }
 
     @Test
@@ -106,7 +100,6 @@ class ShoppingCartServiceTest {
 
     @AfterEach
     void cleanup() throws Exception {
-        shoppingCartItemRepository.deleteAll();
         shoppingCartRepository.deleteAll();
         productRepository.deleteAll();
         personRepository.deleteAll();

@@ -1,7 +1,5 @@
 package de.borisskert.springboot.liquibaseexample;
 
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.MariaDBContainer;
@@ -14,8 +12,6 @@ import org.testcontainers.utility.DockerImageName;
  * Tests the {@link PersonRepository} against the Postgres database.
  */
 @Testcontainers
-@SpringBootTest
-@ActiveProfiles("test")
 class PersonRepositoryMariaDbIT extends PersonRepositoryTest {
 
     @Container

@@ -8,6 +8,8 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
+                  # It seems that Liquibase cannot handle properly UUIDs using MySQL
+                  # https://github.com/liquibase/liquibase/issues/5145
                   type: varchar(36)
                   constraints:
                     nullable: false

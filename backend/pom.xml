@@ -11,9 +11,9 @@
     </parent>
 
     <groupId>de.borisskert.springboot</groupId>
-    <artifactId>liquibase-example</artifactId>
+    <artifactId>backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>liquibase-example</name>
+    <name>Liquibase Example (Backend)</name>
     <description>Demo project how to use liquibase in Spring Boot</description>
 
     <properties>

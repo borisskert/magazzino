@@ -3,13 +3,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>de.borisskert</groupId>
+    <groupId>de.borisskert.springboot</groupId>
     <artifactId>liquibase-example</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Liquibase Example</name>
+    
+    <name>Liquibase Example (Parent)</name>
+    <description>Demo project how to use liquibase in Spring Boot</description>
+    
     <packaging>pom</packaging>
     
     <modules>
+        <module>frontend</module>
         <module>backend</module>
     </modules>
 

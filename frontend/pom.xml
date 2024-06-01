@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>de.borisskert.springboot</groupId>
+  <artifactId>frontend</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+
+  <name>Liquibase Example (Frontend)</name>
+
+  <packaging>pom</packaging>
+
+  <build>
+    <finalName>${artifactId}</finalName>
+
+    <resources>
+      <resource>
+        <directory>./dist/frontend</directory>
+        <targetPath>public</targetPath>
+      </resource>
+    </resources>
+
+    <plugins>
+      <plugin>
+        <groupId>com.github.eirslett</groupId>
+        <artifactId>frontend-maven-plugin</artifactId>
+        <version>1.15.0</version>
+        <configuration>
+          <workingDirectory>./</workingDirectory>
+          <nodeVersion>v20.11.1</nodeVersion>
+          <npmVersion>10.5.0</npmVersion>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>local</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.github.eirslett</groupId>
+            <artifactId>frontend-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>install node and npm</id>
+                <goals>
+                  <goal>install-node-and-npm</goal>
+                </goals>
+                <configuration>
+                  <installDirectory>target</installDirectory>
+                </configuration>
+              </execution>
+              <execution>
+                <id>npm install</id>
+                <goals>
+                  <goal>npm</goal>
+                </goals>
+                <configuration>
+                  <arguments>install</arguments>
+                  <installDirectory>target</installDirectory>
+                </configuration>
+              </execution>
+              <execution>
+                <id>npm build</id>
+                <goals>
+                  <goal>npm</goal>
+                </goals>
+                <configuration>
+                  <arguments>run build</arguments>
+                  <installDirectory>target</installDirectory>
+                </configuration>
+              </execution>
+              <execution>
+                <id>run cypress tests</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>npm</goal>
+                </goals>
+                <configuration>
+                  <arguments>--prefix ../ run e2e:ci</arguments>
+                  <workingDirectory>target</workingDirectory>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>ci</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.github.eirslett</groupId>
+            <artifactId>frontend-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>install node and npm</id>
+                <goals>
+                  <goal>install-node-and-npm</goal>
+                </goals>
+                <configuration>
+                  <installDirectory>target</installDirectory>
+                </configuration>
+              </execution>
+              <execution>
+                <id>npm ci</id>
+                <goals>
+                  <goal>npm</goal>
+                </goals>
+                <configuration>
+                  <arguments>ci</arguments>
+                  <installDirectory>target</installDirectory>
+                </configuration>
+              </execution>
+              <execution>
+                <id>npm build</id>
+                <goals>
+                  <goal>npm</goal>
+                </goals>
+                <configuration>
+                  <arguments>run build -- -c production</arguments>
+                  <installDirectory>target</installDirectory>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>

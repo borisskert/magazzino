@@ -52,6 +52,71 @@ class ShoppingCartControllerTest {
     }
 
     @Test
+    void shouldFindShoppingCartsForFirstPageAndSizeTwo() throws Exception {
+        given()
+                .when()
+                .param("sort", "id,asc")
+                .param("page", 0)
+                .param("size", 2)
+                .get("/shopping-cart/search")
+                .then()
+                .statusCode(200)
+                .body(
+                        "size", equalTo(2),
+                        "number", equalTo(0),
+                        "totalPages", equalTo(3),
+                        "first", equalTo(true),
+                        "last", equalTo(false),
+                        "content.size()", equalTo(2),
+                        "content[0].id", equalTo(shoppingCart1.getId().intValue()),
+                        "content[1].id", equalTo(shoppingCart2.getId().intValue())
+                );
+    }
+
+    @Test
+    void shouldFindShoppingCartsForSecondPageAndSizeTwo() throws Exception {
+        given()
+                .when()
+                .param("sort", "id,asc")
+                .param("page", 1)
+                .param("size", 2)
+                .get("/shopping-cart/search")
+                .then()
+                .statusCode(200)
+                .body(
+                        "size", equalTo(2),
+                        "number", equalTo(1),
+                        "totalPages", equalTo(3),
+                        "first", equalTo(false),
+                        "last", equalTo(false),
+                        "content.size()", equalTo(2),
+                        "content[0].id", equalTo(shoppingCart3.getId().intValue()),
+                        "content[1].id", equalTo(shoppingCart4.getId().intValue())
+                );
+    }
+
+    @Test
+    void shouldFindShoppingCartsForLastPageAndSizeTwo() throws Exception {
+        given()
+                .when()
+                .param("sort", "id,asc")
+                .param("page", 2)
+                .param("size", 2)
+                .get("/shopping-cart/search")
+                .then()
+                .statusCode(200)
+                .body(
+                        "size", equalTo(2),
+                        "number", equalTo(2),
+                        "totalPages", equalTo(3),
+                        "first", equalTo(false),
+                        "last", equalTo(true),
+                        "content.size()", equalTo(1),
+                        "content[0].id", equalTo(shoppingCart5.getId().intValue())
+                );
+    }
+
+    @Test
     void shouldGetPropertiesInResult() throws Exception {
         given()
                 .when()
@@ -86,7 +151,9 @@ class ShoppingCartControllerTest {
                         "content[0].items[2].product.number", equalTo(product3.getNumber()),
                         "content[0].items[2].product.name", equalTo(product3.getName()),
                         "content[0].items[2].product.price", equalTo(product3.getPrice().floatValue()),
-                        "content[0].items[2].quantity", equalTo(3)
+                        "content[0].items[2].quantity", equalTo(3),
+
+                        "content[0].totalPrice", equalTo(162.92f)
                 );
     }
 

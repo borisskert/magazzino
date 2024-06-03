@@ -2,6 +2,9 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ShoppingCartContainerComponent} from './shopping-cart-container.component';
 import {ShoppingCartModule} from "../shopping-cart.module";
+import {provideHttpClient} from "@angular/common/http";
+import {provideHttpClientTesting} from "@angular/common/http/testing";
+import {NoopAnimationsModule} from "@angular/platform-browser/animations";
 
 describe('ShoppingCartContainerComponent', () => {
   let component: ShoppingCartContainerComponent;
@@ -9,7 +12,14 @@ describe('ShoppingCartContainerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ShoppingCartModule]
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+      ],
+      imports: [
+        NoopAnimationsModule,
+        ShoppingCartModule
+      ]
     })
       .compileComponents();
 

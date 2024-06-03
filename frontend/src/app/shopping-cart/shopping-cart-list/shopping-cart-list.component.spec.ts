@@ -1,6 +1,8 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ShoppingCartListComponent} from './shopping-cart-list.component';
+import {NoopAnimationsModule} from "@angular/platform-browser/animations";
+import {ShoppingCartModule} from "../shopping-cart.module";
 
 describe('ShoppingCartListComponent', () => {
   let component: ShoppingCartListComponent;
@@ -8,7 +10,10 @@ describe('ShoppingCartListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ShoppingCartListComponent]
+      imports: [
+        NoopAnimationsModule,
+        ShoppingCartModule
+      ]
     })
       .compileComponents();
 

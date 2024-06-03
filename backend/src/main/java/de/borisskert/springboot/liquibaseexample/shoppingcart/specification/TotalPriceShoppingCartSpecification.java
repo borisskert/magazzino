@@ -16,6 +16,8 @@ public class TotalPriceShoppingCartSpecification implements Specification<Shoppi
 
     @Override
     public Predicate toPredicate(Root<ShoppingCart> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+        query.distinct(true);
+
         var selection = query.subquery(Long.class);
         var subRoot = selection.from(ShoppingCart.class);
 

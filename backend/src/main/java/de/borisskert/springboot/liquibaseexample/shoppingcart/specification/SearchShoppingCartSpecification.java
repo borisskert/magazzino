@@ -24,6 +24,8 @@ public class SearchShoppingCartSpecification implements Specification<ShoppingCa
 
     @Override
     public Predicate toPredicate(Root<ShoppingCart> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+        query.distinct(true);
+
         Join<ShoppingCartItem, ShoppingCart> items = root.join("items", JoinType.LEFT);
         Join<Product, ShoppingCart> products = items.join("product", JoinType.LEFT);
 

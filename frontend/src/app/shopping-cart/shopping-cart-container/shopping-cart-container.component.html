@@ -1,1 +1,9 @@
-<p>shopping-cart-container works!</p>
+<app-shopping-cart-filter
+  [search]="search$ | async"
+  (searchChange)="onSearchChange($event)"
+></app-shopping-cart-filter>
+
+<app-shopping-cart-list
+  [shoppingCarts]="shoppingCarts$ | async"
+  (pageChange)="onPageChange($event)"
+></app-shopping-cart-list>

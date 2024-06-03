@@ -31,7 +31,7 @@ databaseChangeLog:
 
               - column:
                   name: description
-                  type: varchar(255)
+                  type: varchar(2048)
                   constraints:
                     nullable: false
 

@@ -1,1 +1,13 @@
-<p>shopping-cart-filter works!</p>
+<mat-form-field>
+  <input matInput class="form-field"
+         (keyup)="onChangeId($event)"
+         placeholder="ID"
+         [value]="search.id || ''">
+</mat-form-field>
+
+<mat-form-field>
+  <input matInput class="form-field"
+         (keyup)="onMinTotalPrice($event)"
+         placeholder="minTotalPrice"
+         [value]="search.minTotalPrice || ''">
+</mat-form-field>

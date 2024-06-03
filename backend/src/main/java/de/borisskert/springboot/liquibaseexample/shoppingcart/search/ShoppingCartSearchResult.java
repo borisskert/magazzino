@@ -11,7 +11,9 @@ import java.util.UUID;
 public record ShoppingCartSearchResult(
         Long id,
         Customer customer,
-        List<Item> items, Boolean checkedOut
+        List<Item> items,
+        Boolean checkedOut,
+        Double totalPrice
 ) {
 
     public record Customer(Long id, String firstName, String lastName) {
@@ -26,7 +28,7 @@ public record ShoppingCartSearchResult(
     }
 
     public record Product(UUID id, String name, String number, Double price) {
-        
+
         public static Product fromEntity(de.borisskert.springboot.liquibaseexample.product.Product product) {
             return new Product(
                     product.getId(),
@@ -38,7 +40,7 @@ public record ShoppingCartSearchResult(
     }
 
     public record Item(Product product, Long quantity) {
-        
+
         public static Item fromEntity(ShoppingCartItem item) {
             return new Item(
                     Product.fromEntity(item.getProduct()),
@@ -58,7 +60,14 @@ public record ShoppingCartSearchResult(
                 cart.getId(),
                 Customer.fromEntity(cart.getCustomer()),
                 items,
-                cart.isCheckedOut()
+                cart.isCheckedOut(),
+                calculateTotalPrice(items)
         );
+    }
+
+    private static double calculateTotalPrice(List<Item> items) {
+        return items.stream()
+                .mapToDouble(item -> item.product.price * item.quantity)
+                .sum();
     }
 }

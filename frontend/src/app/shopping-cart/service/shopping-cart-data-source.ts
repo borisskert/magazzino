@@ -29,14 +29,6 @@ export class ShoppingCartDataSource implements DataSource<ShoppingCart> {
       ...search
     };
 
-    if (newSearch.id === undefined) {
-      delete newSearch.id;
-    }
-
-    if (newSearch.minTotalPrice === undefined) {
-      delete newSearch.minTotalPrice;
-    }
-
     this._search.next(newSearch);
   }
 

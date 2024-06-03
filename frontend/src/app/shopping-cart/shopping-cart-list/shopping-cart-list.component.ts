@@ -1,4 +1,4 @@
-import {AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {ShoppingCart} from "../model/shopping-cart";
 import {MatPaginator, MatPaginatorIntl, PageEvent} from "@angular/material/paginator";
 import {emptyPage, Page, toEmptyPage} from "../../pagination/page";
@@ -8,7 +8,7 @@ import {emptyPage, Page, toEmptyPage} from "../../pagination/page";
   templateUrl: './shopping-cart-list.component.html',
   styleUrl: './shopping-cart-list.component.scss'
 })
-export class ShoppingCartListComponent implements AfterViewInit {
+export class ShoppingCartListComponent {
 
   @Input({
     transform: (value: Page<ShoppingCart> | null) => toEmptyPage(value)
@@ -22,12 +22,12 @@ export class ShoppingCartListComponent implements AfterViewInit {
     new MatPaginatorIntl(), ChangeDetectorRef.prototype
   );
 
-  displayedColumns = ['id', 'customer', 'checkedOut', 'totalPrice'];
+  public get displayedColumns(): string[] {
+    return ['id', 'customer', 'checkedOut', 'totalPrice'];
+  }
 
-  pageSizeOptions = [2, 5, 10, 100];
-
-  ngAfterViewInit() {
-    // this.dataSource.paginator = this.paginator;
+  public get pageSizeOptions(): number[] {
+    return [2, 5, 10, 100];
   }
 
   onPageChange($event: PageEvent) {

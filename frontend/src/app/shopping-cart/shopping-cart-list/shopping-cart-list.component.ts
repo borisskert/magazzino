@@ -23,7 +23,7 @@ export class ShoppingCartListComponent {
   );
 
   public get displayedColumns(): string[] {
-    return ['id', 'customer', 'checkedOut', 'totalPrice'];
+    return ['id', 'customer', 'items', 'checkedOut', 'totalPrice'];
   }
 
   public get pageSizeOptions(): number[] {

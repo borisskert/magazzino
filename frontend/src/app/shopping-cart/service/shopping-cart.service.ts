@@ -19,6 +19,14 @@ export class ShoppingCartService {
       delete request.id;
     }
 
+    if (request.productName === undefined) {
+      delete request.productName;
+    }
+
+    if (request.productNumber === undefined) {
+      delete request.productNumber;
+    }
+
     if (request.minTotalPrice === undefined) {
       delete request.minTotalPrice;
     }

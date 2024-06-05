@@ -21,15 +21,29 @@ export class ShoppingCartFilterComponent {
   public searchChange: EventEmitter<ShoppingCartSearch> = new EventEmitter<ShoppingCartSearch>();
 
   onChangeId($event: KeyboardEvent) {
-    let value = ($event.target as HTMLInputElement).value;
+    const value = ($event.target as HTMLInputElement).value;
     this.search.id = value ? Number.parseInt(value, 10) : undefined;
 
     this.searchChange.emit(this.search);
   }
 
   onMinTotalPrice($event: KeyboardEvent) {
-    let value = ($event.target as HTMLInputElement).value;
+    const value = ($event.target as HTMLInputElement).value;
     this.search.minTotalPrice = value ? Number.parseFloat(value) : undefined;
+
+    this.searchChange.emit(this.search);
+  }
+
+  onChangeProductName($event: KeyboardEvent) {
+    const value = ($event.target as HTMLInputElement).value;
+    this.search.productName = value ? value : undefined;
+
+    this.searchChange.emit(this.search);
+  }
+
+  onChangeProductNumber($event: KeyboardEvent) {
+    const value = ($event.target as HTMLInputElement).value;
+    this.search.productNumber = value ? value : undefined;
 
     this.searchChange.emit(this.search);
   }

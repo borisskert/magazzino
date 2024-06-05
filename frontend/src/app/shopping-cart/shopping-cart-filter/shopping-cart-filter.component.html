@@ -7,6 +7,20 @@
 
 <mat-form-field>
   <input matInput class="form-field"
+         (keyup)="onChangeProductName($event)"
+         placeholder="product name"
+         [value]="search.productName || ''">
+</mat-form-field>
+
+<mat-form-field>
+  <input matInput class="form-field"
+         (keyup)="onChangeProductNumber($event)"
+         placeholder="product number"
+         [value]="search.productNumber || ''">
+</mat-form-field>
+
+<mat-form-field>
+  <input matInput class="form-field"
          (keyup)="onMinTotalPrice($event)"
          placeholder="minTotalPrice"
          [value]="search.minTotalPrice || ''">

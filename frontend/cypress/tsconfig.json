@@ -1,0 +1,7 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    // https://github.com/cypress-io/cypress/issues/26203#issuecomment-1648816450
+    "sourceMap": false
+  }
+}

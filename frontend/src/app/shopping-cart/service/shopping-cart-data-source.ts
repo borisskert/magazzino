@@ -1,7 +1,7 @@
 import {CollectionViewer, DataSource} from "@angular/cdk/collections";
 import {ShoppingCart} from "../model/shopping-cart";
 import {Injectable} from "@angular/core";
-import {BehaviorSubject, map, Observable} from "rxjs";
+import {BehaviorSubject, debounceTime, map, Observable, switchMap} from "rxjs";
 import {defaultShoppingCartSearch, ShoppingCartSearch} from "../model/shopping-cart-search";
 import {emptyPage, Page} from "../../pagination/page";
 import {ShoppingCartService} from "./shopping-cart.service";
@@ -15,12 +15,10 @@ export class ShoppingCartDataSource implements DataSource<ShoppingCart> {
   private _shoppingCarts$: BehaviorSubject<Page<ShoppingCart>> = new BehaviorSubject<Page<ShoppingCart>>(emptyPage());
 
   constructor(private readonly shoppingCartService: ShoppingCartService) {
-    this._search.subscribe(value => {
-      this.shoppingCartService.search(value)
-        .subscribe(
-          value => this._shoppingCarts$.next(value)
-        );
-    });
+    this._search.pipe(
+      debounceTime(200),
+      switchMap(search => this.shoppingCartService.search(search))
+    ).subscribe(value => this._shoppingCarts$.next(value))
   }
 
   public refresh(search: ShoppingCartSearch = defaultShoppingCartSearch()) {

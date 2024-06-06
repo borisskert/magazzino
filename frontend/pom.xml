@@ -76,6 +76,17 @@
                   <installDirectory>target</installDirectory>
                 </configuration>
               </execution>
+              <execution>
+                <id>run cypress tests</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>npm</goal>
+                </goals>
+                <configuration>
+                  <arguments>--prefix ../ run e2e:ci</arguments>
+                  <workingDirectory>target</workingDirectory>
+                </configuration>
+              </execution>
             </executions>
           </plugin>
         </plugins>

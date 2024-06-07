@@ -11,16 +11,7 @@
 
   <ng-container matColumnDef="items">
     <mat-header-cell *matHeaderCellDef>Items</mat-header-cell>
-    <mat-cell *matCellDef="let cart ">
-      <section>
-        <div *ngFor="let item of cart.items" class="row">
-          <div class="col">{{ item.product.number }}</div>
-          <div class="col sub-column-product-name">{{ item.product.name }}</div>
-          <div class="col">{{ item.product.price }}</div>
-          <div class="col">{{ item.quantity }}</div>
-        </div>
-      </section>
-    </mat-cell>
+    <mat-cell *matCellDef="let cart ">{{ articleCount(cart) }} item(s)</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="checkedOut">

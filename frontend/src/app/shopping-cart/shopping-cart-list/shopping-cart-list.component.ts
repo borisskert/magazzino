@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
-import {ShoppingCart} from "../model/shopping-cart";
+import {articleCount, ShoppingCart} from "../model/shopping-cart";
 import {MatPaginator, MatPaginatorIntl, PageEvent} from "@angular/material/paginator";
 import {emptyPage, Page, toEmptyPage} from "../../pagination/page";
 
@@ -33,4 +33,6 @@ export class ShoppingCartListComponent {
   onPageChange($event: PageEvent) {
     this.pageChange.emit($event);
   }
+
+  protected readonly articleCount = articleCount;
 }

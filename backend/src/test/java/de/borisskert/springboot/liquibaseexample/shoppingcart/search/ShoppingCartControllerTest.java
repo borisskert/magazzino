@@ -25,6 +25,8 @@ import static org.hamcrest.Matchers.equalTo;
 @ActiveProfiles("test")
 class ShoppingCartControllerTest {
 
+    private static final String SHOPPING_CART_SEARCH_PATH = "/api/shopping-cart/search";
+
     @BeforeEach
     void setup() throws Exception {
         setupRestAssured();
@@ -38,7 +40,7 @@ class ShoppingCartControllerTest {
         given()
                 .when()
                 .param("sort", "id,asc")
-                .get("/shopping-cart/search")
+                .get(SHOPPING_CART_SEARCH_PATH)
                 .then()
                 .statusCode(200)
                 .body(
@@ -58,7 +60,7 @@ class ShoppingCartControllerTest {
                 .param("sort", "id,asc")
                 .param("page", 0)
                 .param("size", 2)
-                .get("/shopping-cart/search")
+                .get(SHOPPING_CART_SEARCH_PATH)
                 .then()
                 .statusCode(200)
                 .body(
@@ -80,7 +82,7 @@ class ShoppingCartControllerTest {
                 .param("sort", "id,asc")
                 .param("page", 1)
                 .param("size", 2)
-                .get("/shopping-cart/search")
+                .get(SHOPPING_CART_SEARCH_PATH)
                 .then()
                 .statusCode(200)
                 .body(
@@ -102,7 +104,7 @@ class ShoppingCartControllerTest {
                 .param("sort", "id,asc")
                 .param("page", 2)
                 .param("size", 2)
-                .get("/shopping-cart/search")
+                .get(SHOPPING_CART_SEARCH_PATH)
                 .then()
                 .statusCode(200)
                 .body(
@@ -121,7 +123,7 @@ class ShoppingCartControllerTest {
         given()
                 .when()
                 .param("id", shoppingCart1.getId())
-                .get("/shopping-cart/search")
+                .get(SHOPPING_CART_SEARCH_PATH)
                 .then()
                 .statusCode(200)
                 .body(
@@ -163,7 +165,7 @@ class ShoppingCartControllerTest {
                 .when()
                 .param("productNumber", product1.getNumber())
                 .param("sort", "id,asc")
-                .get("/shopping-cart/search")
+                .get(SHOPPING_CART_SEARCH_PATH)
                 .then()
                 .statusCode(200)
                 .body(
@@ -179,7 +181,7 @@ class ShoppingCartControllerTest {
                 .when()
                 .param("productName", "uCt 1")
                 .param("sort", "id,asc")
-                .get("/shopping-cart/search")
+                .get(SHOPPING_CART_SEARCH_PATH)
                 .then()
                 .statusCode(200)
                 .body(
@@ -196,7 +198,7 @@ class ShoppingCartControllerTest {
                 .when()
                 .param("minTotalPrice", 2000.0)
                 .param("sort", "id,asc")
-                .get("/shopping-cart/search")
+                .get(SHOPPING_CART_SEARCH_PATH)
                 .then()
                 .statusCode(200)
                 .body(

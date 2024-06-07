@@ -31,7 +31,7 @@ export class ShoppingCartService {
       delete request.minTotalPrice;
     }
 
-    return this.http.get<Page<ShoppingCart>>(`${environment.backendUrl}/shopping-cart/search`, {
+    return this.http.get<Page<ShoppingCart>>(`${environment.backendUrl}/api/shopping-cart/search`, {
       params: request as any
     });
   }

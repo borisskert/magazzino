@@ -1,0 +1,260 @@
+{
+  "content": [
+    {
+      "id": 1,
+      "customer": {
+        "id": 1,
+        "firstName": "Alice",
+        "lastName": "Smith"
+      },
+      "items": [
+        {
+          "product": {
+            "id": "b0717708-0cae-4ae6-97fa-272c02922720",
+            "name": "24GB MSI GeForce RTX 4090 Gaming X Slim Aktiv PCIe 4.0 x16 (Retail)",
+            "number": "76515",
+            "price": 1848.99
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": "7c2bd1c9-23e1-439c-8ecb-b4b384796175",
+            "name": "4TB Samsung 990 PRO M.2 2280 PCIe 4.0 x4 3D-NAND TLC (MZ-V9P4T0BW)",
+            "number": "76276",
+            "price": 308.9
+          },
+          "quantity": 2
+        },
+        {
+          "product": {
+            "id": "aa33be1f-922b-4cba-a6cf-ea8b26156631",
+            "name": "850 Watt be quiet! Pure Power 12 M Modular 80+ Gold",
+            "number": "9084274",
+            "price": 114.8
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": "95ac7fc8-309f-45e6-8f88-e05176d10d83",
+            "name": "AMD Ryzen 9 7950X3D 16x 4.20GHz So.AM5 WOF",
+            "number": "75433",
+            "price": 529.99
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": "01778c1d-8495-4327-b5da-b47fae34cfab",
+            "name": "Corsair Vengeance LPX 32GB DDR5-6400 DIMM CL36 Dual Kit",
+            "number": "9120293",
+            "price": 299.9
+          },
+          "quantity": 2
+        },
+        {
+          "product": {
+            "id": "ded7a2b1-4a3b-498c-a612-956c1b34d3e0",
+            "name": "MSI Gaming Plus WIFI AMD X670E So.AM5 DDR5 ATX Retail",
+            "number": "9120291",
+            "price": 245.8
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": "ebf28361-5f12-4aa0-9f88-da8dbbdb6f58",
+            "name": "NZXT H9 Flow Midi Tower ohne Netzteil schwarz",
+            "number": "75408",
+            "price": 136.0
+          },
+          "quantity": 1
+        }
+      ],
+      "checkedOut": false,
+      "totalPrice": 4093.18
+    },
+    {
+      "id": 2,
+      "customer": {
+        "id": 2,
+        "firstName": "Bob",
+        "lastName": "Doe"
+      },
+      "items": [
+        {
+          "product": {
+            "id": "5c2f6689-5cfe-4d2b-b429-f5f53db71589",
+            "name": "24GB ASRock Radeon RX 7900 XTX Taichi OC Aktiv PCIe 4.0 x16 (Retail)",
+            "number": "9082271",
+            "price": 990.99
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": "ddb5c9a2-03d0-48c4-978c-c816df961c09",
+            "name": "64GB Kingston FURY Beast DDR5-5200 DIMM CL40 Dual Kit",
+            "number": "9053295",
+            "price": 200.37
+          },
+          "quantity": 2
+        },
+        {
+          "product": {
+            "id": "aa33be1f-922b-4cba-a6cf-ea8b26156631",
+            "name": "850 Watt be quiet! Pure Power 12 M Modular 80+ Gold",
+            "number": "9084274",
+            "price": 114.8
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": "69b30a6b-8233-4efc-aacf-9f2cc9a6d328",
+            "name": "ASRock Pro RS Intel Z790 So.1700 DDR5 ATX Retail",
+            "number": "9120292",
+            "price": 349.9
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": "f1a5a99d-d9d9-4b68-88de-6dde63f13f95",
+            "name": "Intel Core i9 14900KF 24 (8+16) 3.20GHz So.1700 WOF",
+            "number": "76398",
+            "price": 575.84
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": "ebf28361-5f12-4aa0-9f88-da8dbbdb6f58",
+            "name": "NZXT H9 Flow Midi Tower ohne Netzteil schwarz",
+            "number": "75408",
+            "price": 136.0
+          },
+          "quantity": 1
+        }
+      ],
+      "checkedOut": true,
+      "totalPrice": 2568.27
+    },
+    {
+      "id": 3,
+      "customer": {
+        "id": 3,
+        "firstName": "Charlie",
+        "lastName": "Brown"
+      },
+      "items": [
+        {
+          "product": {
+            "id": "95ac7fc8-309f-45e6-8f88-e05176d10d83",
+            "name": "AMD Ryzen 9 7950X3D 16x 4.20GHz So.AM5 WOF",
+            "number": "75433",
+            "price": 529.99
+          },
+          "quantity": 3
+        }
+      ],
+      "checkedOut": true,
+      "totalPrice": 1589.97
+    },
+    {
+      "id": 4,
+      "customer": {
+        "id": 4,
+        "firstName": "David",
+        "lastName": "Miller"
+      },
+      "items": [
+        {
+          "product": {
+            "id": "b0717708-0cae-4ae6-97fa-272c02922720",
+            "name": "24GB MSI GeForce RTX 4090 Gaming X Slim Aktiv PCIe 4.0 x16 (Retail)",
+            "number": "76515",
+            "price": 1848.99
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": "01778c1d-8495-4327-b5da-b47fae34cfab",
+            "name": "Corsair Vengeance LPX 32GB DDR5-6400 DIMM CL36 Dual Kit",
+            "number": "9120293",
+            "price": 299.9
+          },
+          "quantity": 2
+        },
+        {
+          "product": {
+            "id": "f1a5a99d-d9d9-4b68-88de-6dde63f13f95",
+            "name": "Intel Core i9 14900KF 24 (8+16) 3.20GHz So.1700 WOF",
+            "number": "76398",
+            "price": 575.84
+          },
+          "quantity": 1
+        }
+      ],
+      "checkedOut": false,
+      "totalPrice": 3024.63
+    },
+    {
+      "id": 5,
+      "customer": {
+        "id": 5,
+        "firstName": "Eve",
+        "lastName": "Johnson"
+      },
+      "items": [
+        {
+          "product": {
+            "id": "ddb5c9a2-03d0-48c4-978c-c816df961c09",
+            "name": "64GB Kingston FURY Beast DDR5-5200 DIMM CL40 Dual Kit",
+            "number": "9053295",
+            "price": 200.37
+          },
+          "quantity": 2
+        },
+        {
+          "product": {
+            "id": "ded7a2b1-4a3b-498c-a612-956c1b34d3e0",
+            "name": "MSI Gaming Plus WIFI AMD X670E So.AM5 DDR5 ATX Retail",
+            "number": "9120291",
+            "price": 245.8
+          },
+          "quantity": 1
+        }
+      ],
+      "checkedOut": false,
+      "totalPrice": 646.54
+    }
+  ],
+  "pageable": {
+    "pageNumber": 0,
+    "pageSize": 5,
+    "sort": {
+      "empty": true,
+      "sorted": false,
+      "unsorted": true
+    },
+    "offset": 0,
+    "paged": true,
+    "unpaged": false
+  },
+  "last": false,
+  "totalElements": 10,
+  "totalPages": 2,
+  "number": 0,
+  "size": 5,
+  "sort": {
+    "empty": true,
+    "sorted": false,
+    "unsorted": true
+  },
+  "first": true,
+  "numberOfElements": 5,
+  "empty": false
+}

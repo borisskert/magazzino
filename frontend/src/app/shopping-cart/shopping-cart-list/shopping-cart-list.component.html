@@ -1,0 +1,36 @@
+<mat-table [dataSource]="shoppingCarts.content">
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+    <mat-cell *matCellDef="let cart">{{ cart.id }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="customer">
+    <mat-header-cell *matHeaderCellDef>Customer</mat-header-cell>
+    <mat-cell *matCellDef="let cart ">{{ cart.customer.firstName + ' ' + cart.customer.lastName }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="items">
+    <mat-header-cell *matHeaderCellDef>Items</mat-header-cell>
+    <mat-cell *matCellDef="let cart ">{{ articleCount(cart) }} item(s)</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="checkedOut">
+    <mat-header-cell *matHeaderCellDef>Checked out?</mat-header-cell>
+    <mat-cell *matCellDef="let cart ">{{ cart.checkedOut }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="totalPrice">
+    <mat-header-cell *matHeaderCellDef>Total</mat-header-cell>
+    <mat-cell *matCellDef="let cart ">{{ cart.totalPrice }}</mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+
+<mat-paginator [length]="shoppingCarts.totalElements"
+               [pageSize]="shoppingCarts.size"
+               [pageIndex]="shoppingCarts.number"
+               [pageSizeOptions]="pageSizeOptions"
+               (page)="onPageChange($event)"
+></mat-paginator>

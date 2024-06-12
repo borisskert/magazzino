@@ -1,0 +1,39 @@
+<form [formGroup]="form">
+  <mat-form-field>
+    <input matInput class="form-field"
+           formControlName="id"
+           (keyup)="onChange()"
+           placeholder="ID"
+           [value]="search.id || ''">
+    <mat-error *ngIf="form.value.id">
+      Integer numbers only
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput class="form-field"
+           formControlName="productName"
+           (keyup)="onChange()"
+           placeholder="product name"
+           [value]="search.productName || ''">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput class="form-field"
+           formControlName="productNumber"
+           (keyup)="onChange()"
+           placeholder="product number"
+           [value]="search.productNumber || ''">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput class="form-field"
+           formControlName="minTotalPrice"
+           (keyup)="onChange()"
+           placeholder="minTotalPrice"
+           [value]="search.minTotalPrice || ''">
+    <mat-error *ngIf="form.value.minTotalPrice">
+      Floating point numbers only
+    </mat-error>
+  </mat-form-field>
+</form>

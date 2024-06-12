@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {ProductDataSource} from "../service/product-data-source";
 
 @Component({
   selector: 'app-products-container',
@@ -9,4 +10,6 @@ import { Component } from '@angular/core';
 })
 export class ProductsContainerComponent {
 
+  constructor(private readonly dataSource: ProductDataSource) {
+  }
 }

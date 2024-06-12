@@ -73,11 +73,11 @@ public class TestSetup {
         product1 = createProduct("123456", "Product 1", "Description 1", 12.34);
         product2 = createProduct("123457", "Product 2", "Description 2", 23.45);
         product3 = createProduct("123458", "Product 3", "Description 3", 34.56);
-        product4 = createProduct("123459", "Product 4", "Description 4", 45.67);
+        product4 = createProduct("123459", "Product 4", "Descript1on 4", 45.67);
         product5 = createProduct("123460", "Product 5", "Description 5", 56.78);
-        product6 = createProduct("123461", "Product 6", "Description 6", 67.89);
-        product7 = createProduct("123462", "Product 7", "Description 7", 78.90);
-        product8 = createProduct("123463", "Product 8", "Description 8", 89.01);
+        product6 = createProduct("123461", "Product 6", "Descript1on_6", 67.89);
+        product7 = createProduct("123462", "Product 7", "Descript1on_7", 78.90);
+        product8 = createProduct("123463", "Product 8", "Descript1on 8", 89.01);
         product9 = createProduct("123464", "Product 9", "Description 9", 90.12);
         product10 = createProduct("123465", "Product 10", "Description 10", 122.23);
         product11 = createProduct("123466", "Product 11", "Description 11", 222.34);

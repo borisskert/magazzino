@@ -109,7 +109,7 @@ class ProductControllerIT extends TestSetup {
                         "content[4].id", equalTo(product13.getId().toString())
                 );
     }
-    
+
     @Test
     void shouldFilterByNumber() throws Exception {
         given()
@@ -122,6 +122,24 @@ class ProductControllerIT extends TestSetup {
                 .body(
                         "content.size()", equalTo(1),
                         "content[0].id", equalTo(product8.getId().toString())
+                );
+    }
+
+    @Test
+    void shouldFilterByDescription() throws Exception {
+        given()
+                .when()
+                .param("sort", "number,asc")
+                .param("description", "rIPT1on_")
+                .get(PRODUCTS_SEARCH_PATH)
+                .then()
+                .statusCode(200)
+                .body(
+                        "content.size()", equalTo(4),
+                        "content[0].id", equalTo(product4.getId().toString()),
+                        "content[1].id", equalTo(product6.getId().toString()),
+                        "content[2].id", equalTo(product7.getId().toString()),
+                        "content[3].id", equalTo(product8.getId().toString())
                 );
     }
 }

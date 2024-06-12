@@ -109,4 +109,19 @@ class ProductControllerIT extends TestSetup {
                         "content[4].id", equalTo(product13.getId().toString())
                 );
     }
+    
+    @Test
+    void shouldFilterByNumber() throws Exception {
+        given()
+                .when()
+                .param("sort", "number,asc")
+                .param("number", "123463")
+                .get(PRODUCTS_SEARCH_PATH)
+                .then()
+                .statusCode(200)
+                .body(
+                        "content.size()", equalTo(1),
+                        "content[0].id", equalTo(product8.getId().toString())
+                );
+    }
 }

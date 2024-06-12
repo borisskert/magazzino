@@ -2,7 +2,7 @@
   <mat-form-field>
     <input matInput class="form-field"
            formControlName="id"
-           (keyup)="onChangeId($event)"
+           (keyup)="onChange()"
            placeholder="ID"
            [value]="search.id || ''">
     <mat-error *ngIf="form.value.id">
@@ -12,14 +12,16 @@
 
   <mat-form-field>
     <input matInput class="form-field"
-           (keyup)="onChangeProductName($event)"
+           formControlName="productName"
+           (keyup)="onChange()"
            placeholder="product name"
            [value]="search.productName || ''">
   </mat-form-field>
 
   <mat-form-field>
     <input matInput class="form-field"
-           (keyup)="onChangeProductNumber($event)"
+           formControlName="productNumber"
+           (keyup)="onChange()"
            placeholder="product number"
            [value]="search.productNumber || ''">
   </mat-form-field>
@@ -27,7 +29,7 @@
   <mat-form-field>
     <input matInput class="form-field"
            formControlName="minTotalPrice"
-           (keyup)="onMinTotalPrice($event)"
+           (keyup)="onChange()"
            placeholder="minTotalPrice"
            [value]="search.minTotalPrice || ''">
     <mat-error *ngIf="form.value.minTotalPrice">

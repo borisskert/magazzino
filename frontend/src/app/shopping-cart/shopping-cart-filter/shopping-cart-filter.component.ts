@@ -35,46 +35,17 @@ export class ShoppingCartFilterComponent implements OnInit {
     });
   }
 
-  onChangeId($event: KeyboardEvent) {
+  onChange() {
     if (this.form.invalid) {
       return;
     }
 
-    const value = ($event.target as HTMLInputElement).value;
-    this.search.id = value ? Number.parseInt(value, 10) : undefined;
+    let formValue = this.form.value;
 
-    this.searchChange.emit(this.search);
-  }
-
-  onMinTotalPrice($event: KeyboardEvent) {
-    if (this.form.invalid) {
-      return;
-    }
-
-    const value = ($event.target as HTMLInputElement).value;
-    this.search.minTotalPrice = value ? Number.parseFloat(value) : undefined;
-
-    this.searchChange.emit(this.search);
-  }
-
-  onChangeProductName($event: KeyboardEvent) {
-    if (this.form.invalid) {
-      return;
-    }
-
-    const value = ($event.target as HTMLInputElement).value;
-    this.search.productName = value ? value : undefined;
-
-    this.searchChange.emit(this.search);
-  }
-
-  onChangeProductNumber($event: KeyboardEvent) {
-    if (this.form.invalid) {
-      return;
-    }
-
-    const value = ($event.target as HTMLInputElement).value;
-    this.search.productNumber = value ? value : undefined;
+    this.search.id = formValue.id ? Number.parseInt(formValue.id, 10) : undefined;
+    this.search.productName = formValue.productName ? formValue.productName : undefined;
+    this.search.productNumber = formValue.productNumber ? formValue.productNumber : undefined;
+    this.search.minTotalPrice = formValue.minTotalPrice ? Number.parseFloat(formValue.minTotalPrice) : undefined;
 
     this.searchChange.emit(this.search);
   }

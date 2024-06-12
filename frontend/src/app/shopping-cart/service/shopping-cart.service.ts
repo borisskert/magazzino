@@ -15,24 +15,30 @@ export class ShoppingCartService {
   }
 
   public search(request: ShoppingCartSearch): Observable<Page<ShoppingCart>> {
-    if (request.id === undefined) {
-      delete request.id;
-    }
-
-    if (request.productName === undefined) {
-      delete request.productName;
-    }
-
-    if (request.productNumber === undefined) {
-      delete request.productNumber;
-    }
-
-    if (request.minTotalPrice === undefined) {
-      delete request.minTotalPrice;
-    }
-
     return this.http.get<Page<ShoppingCart>>(`${environment.backendUrl}/api/shopping-cart/search`, {
-      params: request as any
+      params: sanitize(request) as any,
     });
   }
+}
+
+function sanitize(request: ShoppingCartSearch): ShoppingCartSearch {
+  const sanitized: ShoppingCartSearch = {...request};
+
+  if (request.id === undefined) {
+    delete sanitized.id;
+  }
+
+  if (request.productName === undefined) {
+    delete sanitized.productName;
+  }
+
+  if (request.productNumber === undefined) {
+    delete sanitized.productNumber;
+  }
+
+  if (request.minTotalPrice === undefined) {
+    delete sanitized.minTotalPrice;
+  }
+
+  return sanitized;
 }

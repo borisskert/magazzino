@@ -1,1 +1,4 @@
-<p>products-container works!</p>
+<app-product-list
+  [products]="products$ | async"
+  (pageChange)="onPageChange($event)"
+></app-product-list>

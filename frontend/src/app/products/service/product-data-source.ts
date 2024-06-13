@@ -34,7 +34,7 @@ export class ProductDataSource implements DataSource<Product> {
     return this._search.asObservable();
   }
 
-  public get shoppingCarts$(): Observable<Page<Product>> {
+  public get products$(): Observable<Page<Product>> {
     return this._products$.asObservable();
   }
 

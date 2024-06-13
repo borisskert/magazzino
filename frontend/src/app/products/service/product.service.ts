@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Product} from "../../shopping-cart/model/product";
 import {Page} from "../../pagination/page";
 import {ProductSearch} from "../model/product-search";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,9 @@ export class ProductService {
   }
 
   public search(search: ProductSearch) {
-    return this.httpClient.post<Page<Product>>('/api/products/search', sanitize(search));
+    return this.httpClient.get<Page<Product>>(`${environment.backendUrl}/api/products/search`, {
+      params: sanitize(search) as any,
+    });
   }
 }
 

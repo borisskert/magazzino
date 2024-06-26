@@ -1,10 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ProductsContainerComponent } from './products-container.component';
+import {ProductsContainerComponent} from './products-container.component';
 import {provideHttpClient} from "@angular/common/http";
 import {provideHttpClientTesting} from "@angular/common/http/testing";
 import {NoopAnimationsModule} from "@angular/platform-browser/animations";
-import {ShoppingCartModule} from "../../shopping-cart/shopping-cart.module";
 
 describe('ProductsContainerComponent', () => {
   let component: ProductsContainerComponent;

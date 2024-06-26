@@ -30,7 +30,6 @@ export class ProductDataSource implements DataSource<Product> {
     return this._products$.asObservable();
   }
 
-
   public refreshSearch(search: ProductSearch = defaultProductSearch()) {
     let newSearch = {
       ...this._search.getValue(),

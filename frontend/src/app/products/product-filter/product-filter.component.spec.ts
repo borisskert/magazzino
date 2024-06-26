@@ -1,6 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ProductFilterComponent } from './product-filter.component';
+import {ProductFilterComponent} from './product-filter.component';
+import {ProductsModule} from "../products-module";
+import {NoopAnimationsModule} from "@angular/platform-browser/animations";
 
 describe('ProductFilterComponent', () => {
   let component: ProductFilterComponent;
@@ -8,10 +10,13 @@ describe('ProductFilterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProductFilterComponent]
+      imports: [
+        ProductsModule,
+        NoopAnimationsModule,
+      ]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(ProductFilterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

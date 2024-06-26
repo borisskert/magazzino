@@ -192,4 +192,40 @@ class ShoppingCartControllerTest extends TestSetup {
                         "content[1].id", equalTo(shoppingCart4.getId().intValue())
                 );
     }
+
+    @Test
+    void shouldFindCartsSortedByTotalPrice() throws Exception {
+        given()
+                .when()
+                .param("sort", "totalPrice,desc")
+                .get(SHOPPING_CART_SEARCH_PATH)
+                .then()
+                .statusCode(200)
+                .body(
+                        "content.size()", equalTo(5),
+                        "content[0].id", equalTo(shoppingCart4.getId().intValue()),
+                        "content[1].id", equalTo(shoppingCart3.getId().intValue()),
+                        "content[2].id", equalTo(shoppingCart2.getId().intValue()),
+                        "content[3].id", equalTo(shoppingCart1.getId().intValue()),
+                        "content[4].id", equalTo(shoppingCart5.getId().intValue())
+                );
+    }
+
+    @Test
+    void shouldFindCartsSortedByArticleCount() throws Exception {
+        given()
+                .when()
+                .param("sort", "articleCount,asc")
+                .get(SHOPPING_CART_SEARCH_PATH)
+                .then()
+                .statusCode(200)
+                .body(
+                        "content.size()", equalTo(5),
+                        "content[0].id", equalTo(shoppingCart1.getId().intValue()),
+                        "content[1].id", equalTo(shoppingCart2.getId().intValue()),
+                        "content[2].id", equalTo(shoppingCart3.getId().intValue()),
+                        "content[3].id", equalTo(shoppingCart4.getId().intValue()),
+                        "content[4].id", equalTo(shoppingCart5.getId().intValue())
+                );
+    }
 }

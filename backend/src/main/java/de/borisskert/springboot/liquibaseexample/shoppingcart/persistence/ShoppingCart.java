@@ -3,6 +3,7 @@ package de.borisskert.springboot.liquibaseexample.shoppingcart.persistence;
 import de.borisskert.springboot.liquibaseexample.person.Person;
 import de.borisskert.springboot.liquibaseexample.product.Product;
 import jakarta.persistence.*;
+import org.hibernate.annotations.Formula;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,4 +65,10 @@ public class ShoppingCart {
 
         existingItem.setQuantity(existingItem.getQuantity() + quantity);
     }
+
+    @Formula("(SELECT SUM(i.quantity * p.price) FROM shopping_cart_item i JOIN product p ON i.product_id = p.id WHERE i.shopping_cart_id = id)")
+    private double totalPrice;
+
+    @Formula("(SELECT COUNT(i.id) FROM shopping_cart_item i WHERE i.shopping_cart_id = id)")
+    private int articleCount;
 }

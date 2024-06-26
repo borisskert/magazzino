@@ -16,13 +16,13 @@ export class ShoppingCartService {
 
   public search(request: ShoppingCartSearch): Observable<Page<ShoppingCart>> {
     return this.http.get<Page<ShoppingCart>>(`${environment.backendUrl}/api/shopping-cart/search`, {
-      params: sanitize(request) as any,
+      params: sanitize(request),
     });
   }
 }
 
-function sanitize(request: ShoppingCartSearch): ShoppingCartSearch {
-  const sanitized: ShoppingCartSearch = {...request};
+function sanitize(request: ShoppingCartSearch): any {
+  const sanitized: any = {...request};
 
   if (request.id === undefined) {
     delete sanitized.id;
@@ -38,6 +38,10 @@ function sanitize(request: ShoppingCartSearch): ShoppingCartSearch {
 
   if (request.minTotalPrice === undefined) {
     delete sanitized.minTotalPrice;
+  }
+
+  if (request.sort) {
+    sanitized.sort = `${request.sort.active},${request.sort.direction}`;
   }
 
   return sanitized;

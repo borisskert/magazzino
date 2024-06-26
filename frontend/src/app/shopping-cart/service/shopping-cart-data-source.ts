@@ -5,6 +5,7 @@ import {BehaviorSubject, debounceTime, map, Observable, switchMap} from "rxjs";
 import {defaultShoppingCartSearch, ShoppingCartSearch} from "../model/shopping-cart-search";
 import {emptyPage, Page} from "../../pagination/page";
 import {ShoppingCartService} from "./shopping-cart.service";
+import {Sort} from "@angular/material/sort";
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,16 @@ export class ShoppingCartDataSource implements DataSource<ShoppingCart> {
     ).subscribe(value => this._shoppingCarts$.next(value))
   }
 
-  public refresh(search: ShoppingCartSearch = defaultShoppingCartSearch()) {
+  public get search$(): Observable<ShoppingCartSearch> {
+    return this._search.asObservable();
+  }
+
+  public get shoppingCarts$(): Observable<Page<ShoppingCart>> {
+    return this._shoppingCarts$.asObservable();
+  }
+
+
+  public refreshSearch(search: ShoppingCartSearch = defaultShoppingCartSearch()) {
     let newSearch = {
       ...this._search.getValue(),
       ...search
@@ -30,12 +40,11 @@ export class ShoppingCartDataSource implements DataSource<ShoppingCart> {
     this._search.next(newSearch);
   }
 
-  public get search$(): Observable<ShoppingCartSearch> {
-    return this._search.asObservable();
-  }
-
-  public get shoppingCarts$(): Observable<Page<ShoppingCart>> {
-    return this._shoppingCarts$.asObservable();
+  public refreshSort(sort: Sort) {
+    this.refreshSearch({
+      ...this._search.getValue(),
+      sort: sort
+    });
   }
 
   connect(_: CollectionViewer): Observable<readonly ShoppingCart[]> {

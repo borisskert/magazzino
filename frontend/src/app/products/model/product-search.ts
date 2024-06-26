@@ -1,7 +1,6 @@
 import {PageRequest} from "../../pagination/page-request";
-import {Product} from "../../shopping-cart/model/product";
 
-export interface ProductSearch extends PageRequest<Product> {
+export interface ProductSearch extends PageRequest {
   name?: string;
   number?: string;
   description?: string;

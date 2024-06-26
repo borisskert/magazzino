@@ -1,6 +1,7 @@
 <form [formGroup]="form">
   <mat-form-field>
-    <input matInput class="form-field"
+    <input matInput
+           class="form-field"
            formControlName="number"
            (keyup)="onChange()"
            placeholder="Number"
@@ -8,7 +9,8 @@
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput class="form-field"
+    <input matInput
+           class="form-field"
            formControlName="name"
            (keyup)="onChange()"
            placeholder="Name"
@@ -16,7 +18,8 @@
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput class="form-field"
+    <input matInput
+           class="form-field"
            formControlName="description"
            (keyup)="onChange()"
            placeholder="Description"

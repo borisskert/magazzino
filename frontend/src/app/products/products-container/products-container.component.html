@@ -5,4 +5,5 @@
 <app-product-list
   [products]="products$ | async"
   (pageChange)="onPageChange($event)"
+  (sortChange)="onSortChange($event)"
 ></app-product-list>

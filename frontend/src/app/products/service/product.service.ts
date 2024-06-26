@@ -14,14 +14,19 @@ export class ProductService {
   }
 
   public search(search: ProductSearch) {
+    console.log('search', search)
     return this.httpClient.get<Page<Product>>(`${environment.backendUrl}/api/products/search`, {
-      params: sanitize(search) as any,
+      params: {
+        ...sanitize(search),
+      } as any,
     });
   }
 }
 
-function sanitize(search: ProductSearch): ProductSearch {
-  const sanitized: ProductSearch = {...search};
+function sanitize(search: ProductSearch): any {
+  const sanitized: any = {
+    ...search,
+  };
 
   if (search.name === undefined) {
     delete sanitized.name;
@@ -33,6 +38,10 @@ function sanitize(search: ProductSearch): ProductSearch {
 
   if (search.description === undefined) {
     delete sanitized.description;
+  }
+
+  if (search.sort) {
+    sanitized.sort = `${search.sort.active},${search.sort.direction}`
   }
 
   return sanitized;

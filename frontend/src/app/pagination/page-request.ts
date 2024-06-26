@@ -1,7 +1,7 @@
-import {Sort} from "./sort";
+import {Sort} from "@angular/material/sort";
 
-export interface PageRequest<T> {
+export interface PageRequest {
   page: number;
   size: number;
-  sort?: Sort<T>;
+  sort?: Sort;
 }

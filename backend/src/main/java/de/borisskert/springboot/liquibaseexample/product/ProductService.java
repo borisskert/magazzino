@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.mapping.PropertyReferenceException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,6 +18,11 @@ public class ProductService {
 
     public Page<Product> search(ProductSearchDto search, Pageable pageable) {
         Specification<Product> specification = ProductSpecification.from(search);
-        return productRepository.findAll(specification, pageable);
+
+        try {
+            return productRepository.findAll(specification, pageable);
+        } catch (PropertyReferenceException e) {
+            throw new ProductSearchException(e);
+        }
     }
 }

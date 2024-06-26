@@ -2,6 +2,7 @@ import {ChangeDetectorRef, Component, EventEmitter, Input, Output, ViewChild} fr
 import {Product} from "../../shopping-cart/model/product";
 import {emptyPage, Page, toEmptyPage} from "../../pagination/page";
 import {MatPaginator, MatPaginatorIntl, PageEvent} from "@angular/material/paginator";
+import {Sort} from "@angular/material/sort";
 
 @Component({
   selector: 'app-product-list',
@@ -18,6 +19,9 @@ export class ProductListComponent {
   @Output()
   public pageChange: EventEmitter<PageEvent> = new EventEmitter<PageEvent>();
 
+  @Output()
+  public sortChange: EventEmitter<Sort> = new EventEmitter<Sort>();
+
   @ViewChild(MatPaginator) paginator: MatPaginator = new MatPaginator(
     new MatPaginatorIntl(), ChangeDetectorRef.prototype
   );
@@ -32,5 +36,9 @@ export class ProductListComponent {
 
   onPageChange($event: PageEvent) {
     this.pageChange.emit($event);
+  }
+
+  onSortChange($event: Sort) {
+    this.sortChange.emit($event);
   }
 }

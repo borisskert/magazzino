@@ -142,4 +142,16 @@ class ProductControllerIT extends TestSetup {
                         "content[3].id", equalTo(product8.getId().toString())
                 );
     }
+
+    @Test
+    void shouldFailWhenSortIsInvalid() throws Exception {
+        given()
+                .when()
+                .param("sort", "[object Object]")
+                .param("page", 0)
+                .param("size", 3)
+                .get(PRODUCTS_SEARCH_PATH)
+                .then()
+                .statusCode(400);
+    }
 }

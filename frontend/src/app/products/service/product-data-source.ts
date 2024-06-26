@@ -5,6 +5,7 @@ import {BehaviorSubject, debounceTime, map, Observable, switchMap} from "rxjs";
 import {emptyPage, Page} from "../../pagination/page";
 import {defaultProductSearch, ProductSearch} from "../model/product-search";
 import {ProductService} from "./product.service";
+import {Sort} from "@angular/material/sort";
 
 @Injectable({
   providedIn: 'root'
@@ -21,15 +22,6 @@ export class ProductDataSource implements DataSource<Product> {
     ).subscribe(value => this._products$.next(value))
   }
 
-  public refresh(search: ProductSearch = defaultProductSearch()) {
-    let newSearch = {
-      ...this._search.getValue(),
-      ...search
-    };
-
-    this._search.next(newSearch);
-  }
-
   public get search$(): Observable<ProductSearch> {
     return this._search.asObservable();
   }
@@ -38,6 +30,22 @@ export class ProductDataSource implements DataSource<Product> {
     return this._products$.asObservable();
   }
 
+
+  public refreshSearch(search: ProductSearch = defaultProductSearch()) {
+    let newSearch = {
+      ...this._search.getValue(),
+      ...search
+    };
+
+    this._search.next(newSearch);
+  }
+
+  public refreshSort(sort: Sort) {
+    this.refreshSearch({
+      ...this._search.getValue(),
+      sort: sort
+    });
+  }
 
   connect(_: CollectionViewer): Observable<readonly Product[]> {
     return this._products$.asObservable().pipe(

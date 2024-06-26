@@ -8,6 +8,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {ProductsContainerComponent} from "./products-container/products-container.component";
 import {ProductListComponent} from "./product-list/product-list.component";
 import {ProductFilterComponent} from "./product-filter/product-filter.component";
+import {MatSortModule} from "@angular/material/sort";
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import {ProductFilterComponent} from "./product-filter/product-filter.component"
     MatInputModule,
     MatTableModule,
     MatPaginatorModule,
+    MatSortModule,
   ]
 })
 export class ProductsModule {

@@ -5,6 +5,7 @@ import {Page} from "../../pagination/page";
 import {ProductSearch} from "../model/product-search";
 import {Product} from "../../shopping-cart/model/product";
 import {PageEvent} from "@angular/material/paginator";
+import {Sort} from "@angular/material/sort";
 
 @Component({
   selector: 'app-products-container',
@@ -25,7 +26,7 @@ export class ProductsContainerComponent {
   }
 
   onPageChange($event: PageEvent) {
-    this.dataSource.refresh({
+    this.dataSource.refreshSearch({
         page: $event.pageIndex,
         size: $event.pageSize,
       }
@@ -33,6 +34,10 @@ export class ProductsContainerComponent {
   }
 
   onSearchChange($event: ProductSearch) {
-    this.dataSource.refresh($event);
+    this.dataSource.refreshSearch($event);
+  }
+
+  onSortChange($event: Sort) {
+    this.dataSource.refreshSort($event);
   }
 }

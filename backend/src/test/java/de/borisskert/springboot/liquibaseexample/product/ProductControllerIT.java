@@ -1,6 +1,7 @@
 package de.borisskert.springboot.liquibaseexample.product;
 
 import de.borisskert.springboot.liquibaseexample.TestSetup;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -153,5 +154,10 @@ class ProductControllerIT extends TestSetup {
                 .get(PRODUCTS_SEARCH_PATH)
                 .then()
                 .statusCode(400);
+    }
+
+    @AfterEach
+    void tearDown() {
+        super.tearDownEnvironment();
     }
 }

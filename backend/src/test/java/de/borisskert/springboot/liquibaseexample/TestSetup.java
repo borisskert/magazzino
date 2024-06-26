@@ -46,6 +46,12 @@ public class TestSetup {
         setupShoppingCarts();
     }
 
+    protected void tearDownEnvironment() {
+        shoppingCartRepository.deleteAll();
+        productRepository.deleteAll();
+        personRepository.deleteAll();
+    }
+
     private void setupCustomers() {
         person1 = createCustomer("alice", "Alice", "Wonderland", "alice@wonderland.org", LocalDate.of(1980, 1, 12), Person.Role.CUSTOMER);
         person2 = createCustomer("bob", "Bob", "Marley", "bob@marley.org", LocalDate.of(1970, 2, 23), Person.Role.CUSTOMER);

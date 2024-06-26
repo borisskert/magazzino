@@ -1,6 +1,7 @@
 package de.borisskert.springboot.liquibaseexample.shoppingcart.search;
 
 import de.borisskert.springboot.liquibaseexample.TestSetup;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -222,10 +223,15 @@ class ShoppingCartControllerTest extends TestSetup {
                 .body(
                         "content.size()", equalTo(5),
                         "content[0].id", equalTo(shoppingCart1.getId().intValue()),
-                        "content[1].id", equalTo(shoppingCart2.getId().intValue()),
-                        "content[2].id", equalTo(shoppingCart3.getId().intValue()),
-                        "content[3].id", equalTo(shoppingCart4.getId().intValue()),
-                        "content[4].id", equalTo(shoppingCart5.getId().intValue())
+                        "content[1].id", equalTo(shoppingCart5.getId().intValue()),
+                        "content[2].id", equalTo(shoppingCart2.getId().intValue()),
+                        "content[3].id", equalTo(shoppingCart3.getId().intValue()),
+                        "content[4].id", equalTo(shoppingCart4.getId().intValue())
                 );
+    }
+
+    @AfterEach
+    void tearDown() {
+        super.tearDownEnvironment();
     }
 }

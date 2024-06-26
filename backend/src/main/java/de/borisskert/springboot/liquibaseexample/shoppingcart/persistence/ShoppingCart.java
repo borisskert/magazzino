@@ -67,8 +67,8 @@ public class ShoppingCart {
     }
 
     @Formula("(SELECT SUM(i.quantity * p.price) FROM shopping_cart_item i JOIN product p ON i.product_id = p.id WHERE i.shopping_cart_id = id)")
-    private double totalPrice;
+    private Double totalPrice;
 
-    @Formula("(SELECT COUNT(i.id) FROM shopping_cart_item i WHERE i.shopping_cart_id = id)")
-    private int articleCount;
+    @Formula("(SELECT SUM(i.quantity) FROM shopping_cart_item i WHERE i.shopping_cart_id = id)")
+    private Integer articleCount;
 }

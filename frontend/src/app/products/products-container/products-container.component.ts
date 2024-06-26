@@ -31,4 +31,8 @@ export class ProductsContainerComponent {
       }
     )
   }
+
+  onSearchChange($event: ProductSearch) {
+    this.dataSource.refresh($event);
+  }
 }

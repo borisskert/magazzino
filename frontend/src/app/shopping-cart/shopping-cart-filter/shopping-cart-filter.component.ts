@@ -1,9 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {
-  defaultShoppingCartSearch,
-  ShoppingCartSearch,
-  toDefaultShoppingCartSearch
-} from "../model/shopping-cart-search";
+import {defaultShoppingCartSearch, ShoppingCartSearch} from "../model/shopping-cart-search";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
@@ -14,7 +10,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class ShoppingCartFilterComponent implements OnInit {
 
   @Input({
-    transform: toDefaultShoppingCartSearch
+    transform: (value: ShoppingCartSearch | null) => value || defaultShoppingCartSearch()
   })
   public search: ShoppingCartSearch = defaultShoppingCartSearch()
 

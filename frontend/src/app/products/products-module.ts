@@ -7,11 +7,13 @@ import {MatTableModule} from "@angular/material/table";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {ProductsContainerComponent} from "./products-container/products-container.component";
 import {ProductListComponent} from "./product-list/product-list.component";
+import {ProductFilterComponent} from "./product-filter/product-filter.component";
 
 @NgModule({
   declarations: [
     ProductsContainerComponent,
     ProductListComponent,
+    ProductFilterComponent,
   ],
   imports: [
     CommonModule,

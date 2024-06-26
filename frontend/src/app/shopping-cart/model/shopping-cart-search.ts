@@ -14,7 +14,3 @@ export function defaultShoppingCartSearch(): ShoppingCartSearch {
     size: 10
   };
 }
-
-export function toDefaultShoppingCartSearch(value: ShoppingCartSearch | null): ShoppingCartSearch {
-  return value === null ? defaultShoppingCartSearch() : value;
-}

@@ -1,3 +1,7 @@
+<app-product-filter
+  [search]="search$ | async "
+  (searchChange)="onSearchChange($event)"
+></app-product-filter>
 <app-product-list
   [products]="products$ | async"
   (pageChange)="onPageChange($event)"

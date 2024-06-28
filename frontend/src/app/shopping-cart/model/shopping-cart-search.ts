@@ -1,7 +1,6 @@
 import {PageRequest} from "../../pagination/page-request";
-import {ShoppingCart} from "./shopping-cart";
 
-export interface ShoppingCartSearch extends PageRequest<ShoppingCart> {
+export interface ShoppingCartSearch extends PageRequest {
   id?: number;
   productNumber?: string;
   productName?: string;
@@ -13,8 +12,4 @@ export function defaultShoppingCartSearch(): ShoppingCartSearch {
     page: 0,
     size: 10
   };
-}
-
-export function toDefaultShoppingCartSearch(value: ShoppingCartSearch | null): ShoppingCartSearch {
-  return value === null ? defaultShoppingCartSearch() : value;
 }

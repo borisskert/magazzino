@@ -1,0 +1,28 @@
+<form [formGroup]="form">
+  <mat-form-field>
+    <input matInput
+           class="form-field"
+           formControlName="number"
+           (keyup)="onChange()"
+           placeholder="Number"
+           [value]="search.number || ''">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput
+           class="form-field"
+           formControlName="name"
+           (keyup)="onChange()"
+           placeholder="Name"
+           [value]="search.name || ''">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput
+           class="form-field"
+           formControlName="description"
+           (keyup)="onChange()"
+           placeholder="Description"
+           [value]="search.description || ''">
+  </mat-form-field>
+</form>

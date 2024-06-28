@@ -26,7 +26,7 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain mySecurityFilterChain(HttpSecurity http) throws Exception {
-        http.cors(enableCorsForDev());
+        http.cors(configureCors());
         return http.build();
     }
 

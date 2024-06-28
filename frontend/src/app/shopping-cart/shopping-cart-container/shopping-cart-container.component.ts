@@ -5,6 +5,7 @@ import {ShoppingCartSearch} from "../model/shopping-cart-search";
 import {ShoppingCartDataSource} from "../service/shopping-cart-data-source";
 import {Page} from "../../pagination/page";
 import {PageEvent} from "@angular/material/paginator";
+import {Sort} from "@angular/material/sort";
 
 @Component({
   selector: 'app-shopping-cart-container',
@@ -17,7 +18,7 @@ export class ShoppingCartContainerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.shoppingCartDataSource.refresh();
+    this.shoppingCartDataSource.refreshSearch();
   }
 
   public get search$(): Observable<ShoppingCartSearch> {
@@ -29,7 +30,7 @@ export class ShoppingCartContainerComponent implements OnInit {
   }
 
   onPageChange($event: PageEvent) {
-    this.shoppingCartDataSource.refresh({
+    this.shoppingCartDataSource.refreshSearch({
         page: $event.pageIndex,
         size: $event.pageSize,
       }
@@ -37,6 +38,10 @@ export class ShoppingCartContainerComponent implements OnInit {
   }
 
   onSearchChange($event: ShoppingCartSearch) {
-    this.shoppingCartDataSource.refresh($event);
+    this.shoppingCartDataSource.refreshSearch($event);
+  }
+
+  onSortChange($event: Sort) {
+    this.shoppingCartDataSource.refreshSort($event);
   }
 }

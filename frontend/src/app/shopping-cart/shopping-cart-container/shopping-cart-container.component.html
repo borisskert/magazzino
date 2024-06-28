@@ -6,4 +6,5 @@
 <app-shopping-cart-list
   [shoppingCarts]="shoppingCarts$ | async"
   (pageChange)="onPageChange($event)"
+  (sortChange)="onSortChange($event)"
 ></app-shopping-cart-list>

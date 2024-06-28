@@ -1,20 +1,20 @@
 import {ChangeDetectorRef, Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
-import {articleCount, ShoppingCart} from "../model/shopping-cart";
-import {MatPaginator, MatPaginatorIntl, PageEvent} from "@angular/material/paginator";
+import {Product} from "../../shopping-cart/model/product";
 import {emptyPage, Page, toEmptyPage} from "../../pagination/page";
+import {MatPaginator, MatPaginatorIntl, PageEvent} from "@angular/material/paginator";
 import {Sort} from "@angular/material/sort";
 
 @Component({
-  selector: 'app-shopping-cart-list',
-  templateUrl: './shopping-cart-list.component.html',
-  styleUrl: './shopping-cart-list.component.scss'
+  selector: 'app-product-list',
+  templateUrl: './product-list.component.html',
+  styleUrl: './product-list.component.scss'
 })
-export class ShoppingCartListComponent {
+export class ProductListComponent {
 
   @Input({
-    transform: (value: Page<ShoppingCart> | null) => toEmptyPage(value)
+    transform: (value: Page<Product> | null) => toEmptyPage(value)
   })
-  public shoppingCarts: Page<ShoppingCart> = emptyPage();
+  public products: Page<Product> = emptyPage();
 
   @Output()
   public pageChange: EventEmitter<PageEvent> = new EventEmitter<PageEvent>();
@@ -27,7 +27,7 @@ export class ShoppingCartListComponent {
   );
 
   public get displayedColumns(): string[] {
-    return ['id', 'customer', 'articleCount', 'checkedOut', 'totalPrice'];
+    return ['number', 'name', 'price'];
   }
 
   public get pageSizeOptions(): number[] {
@@ -37,8 +37,6 @@ export class ShoppingCartListComponent {
   onPageChange($event: PageEvent) {
     this.pageChange.emit($event);
   }
-
-  protected readonly articleCount = articleCount;
 
   onSortChange($event: Sort) {
     this.sortChange.emit($event);

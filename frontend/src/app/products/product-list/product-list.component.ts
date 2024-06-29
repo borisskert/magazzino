@@ -3,6 +3,8 @@ import {Product} from "../../shopping-cart/model/product";
 import {emptyPage, Page, toEmptyPage} from "../../pagination/page";
 import {MatPaginator, MatPaginatorIntl, PageEvent} from "@angular/material/paginator";
 import {Sort} from "@angular/material/sort";
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {EditProductDialogComponent} from "../edit-product-dialog/edit-product-dialog.component";
 
 @Component({
   selector: 'app-product-list',
@@ -26,8 +28,11 @@ export class ProductListComponent {
     new MatPaginatorIntl(), ChangeDetectorRef.prototype
   );
 
+  constructor(private readonly dialog: MatDialog) {
+  }
+
   public get displayedColumns(): string[] {
-    return ['number', 'name', 'price'];
+    return ['number', 'name', 'price', 'actions'];
   }
 
   public get pageSizeOptions(): number[] {
@@ -40,5 +45,14 @@ export class ProductListComponent {
 
   onSortChange($event: Sort) {
     this.sortChange.emit($event);
+  }
+
+  onEdit(product: Product) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.panelClass = 'edit-product-dialog-container';
+
+    this.dialog.open(EditProductDialogComponent, {
+      data: product,
+    });
   }
 }

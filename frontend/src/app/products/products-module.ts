@@ -9,19 +9,19 @@ import {ProductsContainerComponent} from "./products-container/products-containe
 import {ProductListComponent} from "./product-list/product-list.component";
 import {ProductFilterComponent} from "./product-filter/product-filter.component";
 import {MatSortModule} from "@angular/material/sort";
-import {EditProductComponent} from "./edit-product/edit-product.component";
 import {MatIconModule} from "@angular/material/icon";
-import {MatButton, MatButtonModule, MatIconButton} from "@angular/material/button";
+import {MatButtonModule} from "@angular/material/button";
 import {EditProductDialogComponent} from "./edit-product-dialog/edit-product-dialog.component";
 import {MatDialogModule} from "@angular/material/dialog";
+import {NewProductComponent} from "./new-product/new-product.component";
 
 @NgModule({
   declarations: [
     ProductsContainerComponent,
     ProductListComponent,
     ProductFilterComponent,
-    EditProductComponent,
     EditProductDialogComponent,
+    NewProductComponent,
   ],
   imports: [
     CommonModule,

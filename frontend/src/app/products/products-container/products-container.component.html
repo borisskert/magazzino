@@ -2,8 +2,12 @@
   [search]="search$ | async "
   (searchChange)="onSearchChange($event)"
 ></app-product-filter>
+<app-new-product
+  (create)="onCreate($event)"
+></app-new-product>
 <app-product-list
   [products]="products$ | async"
   (pageChange)="onPageChange($event)"
   (sortChange)="onSortChange($event)"
+  (edit)="onEdit($event)"
 ></app-product-list>

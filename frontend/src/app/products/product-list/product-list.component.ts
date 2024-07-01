@@ -1,10 +1,10 @@
 import {ChangeDetectorRef, Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
-import {Product} from "../../shopping-cart/model/product";
 import {emptyPage, Page, toEmptyPage} from "../../pagination/page";
 import {MatPaginator, MatPaginatorIntl, PageEvent} from "@angular/material/paginator";
 import {Sort} from "@angular/material/sort";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {EditProductDialogComponent} from "../edit-product-dialog/edit-product-dialog.component";
+import {Product} from "../model/product";
 
 @Component({
   selector: 'app-product-list',
@@ -23,6 +23,9 @@ export class ProductListComponent {
 
   @Output()
   public sortChange: EventEmitter<Sort> = new EventEmitter<Sort>();
+
+  @Output()
+  public edit: EventEmitter<Product> = new EventEmitter<Product>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator = new MatPaginator(
     new MatPaginatorIntl(), ChangeDetectorRef.prototype
@@ -49,10 +52,16 @@ export class ProductListComponent {
 
   onEdit(product: Product) {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.panelClass = 'edit-product-dialog-container';
+    dialogConfig.width = '75vw';
+    dialogConfig.height = '75vh';
 
-    this.dialog.open(EditProductDialogComponent, {
+    const matDialogRef = this.dialog.open(EditProductDialogComponent, {
+      ...dialogConfig,
       data: product,
+    });
+
+    matDialogRef.componentInstance.save.subscribe((product: Product) => {
+      this.edit.emit(product);
     });
   }
 }

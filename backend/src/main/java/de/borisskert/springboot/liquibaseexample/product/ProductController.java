@@ -21,7 +21,7 @@ public class ProductController {
     }
 
     @GetMapping("/search")
-    public Page<Product> search(ProductSearchDto search, Pageable pageable) {
+    public Page<Product> search(ProductSearchRequest search, Pageable pageable) {
         return productService.search(search, pageable);
     }
 

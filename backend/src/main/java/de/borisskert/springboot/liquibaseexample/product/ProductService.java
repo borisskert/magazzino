@@ -18,7 +18,7 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public Page<Product> search(ProductSearchDto search, Pageable pageable) {
+    public Page<Product> search(ProductSearchRequest search, Pageable pageable) {
         Specification<Product> specification = ProductSpecification.from(search);
 
         try {

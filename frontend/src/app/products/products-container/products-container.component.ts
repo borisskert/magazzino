@@ -6,6 +6,7 @@ import {ProductSearch} from "../model/product-search";
 import {PageEvent} from "@angular/material/paginator";
 import {Sort} from "@angular/material/sort";
 import {Product} from "../model/product";
+import {SnackbarService} from "../../snackbar/snackbar.service";
 
 @Component({
   selector: 'app-products-container',
@@ -14,7 +15,10 @@ import {Product} from "../model/product";
 })
 export class ProductsContainerComponent {
 
-  constructor(private readonly dataSource: ProductDataSource) {
+  constructor(
+    private readonly dataSource: ProductDataSource,
+    private readonly snackbarService: SnackbarService,
+  ) {
   }
 
   public get search$(): Observable<ProductSearch> {
@@ -45,7 +49,7 @@ export class ProductsContainerComponent {
     this.dataSource.create($event).subscribe(
       {
         next: () => console.log('Product created'),
-        error: () => console.error('Failed to create product')
+        error: () => this.snackbarService.show('Failed to create product. Try again later.')
       }
     );
   }
@@ -54,7 +58,7 @@ export class ProductsContainerComponent {
     this.dataSource.update($event).subscribe(
       {
         next: () => console.log('Product updated'),
-        error: () => console.error('Failed to update product')
+        error: () => this.snackbarService.show('Failed to update product. Try again later.')
       }
     );
   }

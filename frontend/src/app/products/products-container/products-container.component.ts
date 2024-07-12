@@ -7,6 +7,7 @@ import {PageEvent} from "@angular/material/paginator";
 import {Sort} from "@angular/material/sort";
 import {Product} from "../model/product";
 import {SnackbarService} from "../../snackbar/snackbar.service";
+import {ProductDialogService} from "../service/product-dialog.service";
 
 @Component({
   selector: 'app-products-container',
@@ -18,6 +19,7 @@ export class ProductsContainerComponent {
   constructor(
     private readonly dataSource: ProductDataSource,
     private readonly snackbarService: SnackbarService,
+    private readonly productDialogService: ProductDialogService,
   ) {
   }
 
@@ -45,19 +47,37 @@ export class ProductsContainerComponent {
     this.dataSource.refreshSort($event);
   }
 
-  onCreate($event: Product) {
-    this.dataSource.create($event).subscribe(
+  onOpenCreateDialog() {
+    console.log('open create dialog')
+    this.productDialogService.openNewProductDialog().subscribe(
       {
-        next: () => console.log('Product created'),
+        next: (product: Product) => this.onCreate(product)
+      }
+    );
+  }
+
+  onOpenEditDialog($event: Product) {
+    console.log('open edit dialog')
+    this.productDialogService.openEditProductDialog($event).subscribe(
+      {
+        next: (product: Product) => this.onEdit(product)
+      }
+    );
+  }
+
+  private onCreate(product: Product) {
+    this.dataSource.create(product).subscribe(
+      {
+        next: () => this.productDialogService.closeDialog(),
         error: () => this.snackbarService.show('Failed to create product. Try again later.')
       }
     );
   }
 
-  onEdit($event: Product) {
-    this.dataSource.update($event).subscribe(
+  private onEdit(product: Product) {
+    this.dataSource.update(product).subscribe(
       {
-        next: () => console.log('Product updated'),
+        next: () => this.productDialogService.closeDialog(),
         error: () => this.snackbarService.show('Failed to update product. Try again later.')
       }
     );

@@ -13,7 +13,6 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {EditProductDialogComponent} from "./edit-product-dialog/edit-product-dialog.component";
 import {MatDialogModule} from "@angular/material/dialog";
-import {NewProductComponent} from "./new-product/new-product.component";
 
 @NgModule({
   declarations: [
@@ -21,7 +20,6 @@ import {NewProductComponent} from "./new-product/new-product.component";
     ProductListComponent,
     ProductFilterComponent,
     EditProductDialogComponent,
-    NewProductComponent,
   ],
   imports: [
     CommonModule,

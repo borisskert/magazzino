@@ -2,8 +2,6 @@ import {ChangeDetectorRef, Component, EventEmitter, Input, Output, ViewChild} fr
 import {emptyPage, Page, toEmptyPage} from "../../pagination/page";
 import {MatPaginator, MatPaginatorIntl, PageEvent} from "@angular/material/paginator";
 import {Sort} from "@angular/material/sort";
-import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
-import {EditProductDialogComponent} from "../edit-product-dialog/edit-product-dialog.component";
 import {Product} from "../model/product";
 
 @Component({
@@ -31,9 +29,6 @@ export class ProductListComponent {
     new MatPaginatorIntl(), ChangeDetectorRef.prototype
   );
 
-  constructor(private readonly dialog: MatDialog) {
-  }
-
   public get displayedColumns(): string[] {
     return ['number', 'name', 'price', 'actions'];
   }
@@ -51,17 +46,6 @@ export class ProductListComponent {
   }
 
   onEdit(product: Product) {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = '75vw';
-    dialogConfig.height = '75vh';
-
-    const matDialogRef = this.dialog.open(EditProductDialogComponent, {
-      ...dialogConfig,
-      data: product,
-    });
-
-    matDialogRef.componentInstance.save.subscribe((product: Product) => {
-      this.edit.emit(product);
-    });
+    this.edit.emit(product);
   }
 }

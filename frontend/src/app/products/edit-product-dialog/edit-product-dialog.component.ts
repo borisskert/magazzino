@@ -9,21 +9,25 @@ import {Product} from "../model/product";
   styleUrl: './edit-product-dialog.component.scss'
 })
 export class EditProductDialogComponent {
+  title: string = '';
+
   form: FormGroup;
 
   @Output()
   save: EventEmitter<Product> = new EventEmitter<Product>();
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public readonly data: Product,
+    @Inject(MAT_DIALOG_DATA) public readonly data: { title: string, product: Product },
     private readonly formBuilder: FormBuilder
   ) {
+    this.title = data.title;
+
     this.form = this.formBuilder.group({
-      id: [data.id],
-      number: [data.number, [Validators.required, Validators.minLength(3)]],
-      name: [data.name, [Validators.required, Validators.minLength(3)]],
-      description: [data.description, Validators.minLength(3)],
-      price: [data.price, [Validators.required, Validators.min(0), Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
+      id: [data.product.id],
+      number: [data.product.number, [Validators.required, Validators.minLength(3)]],
+      name: [data.product.name, [Validators.required, Validators.minLength(3)]],
+      description: [data.product.description, Validators.minLength(3)],
+      price: [data.product.price, [Validators.required, Validators.min(0), Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
     });
   }
 

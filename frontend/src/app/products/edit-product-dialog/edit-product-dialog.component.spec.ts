@@ -16,7 +16,12 @@ describe('EditProductDialogComponent', () => {
         NoopAnimationsModule,
       ],
       providers: [
-        {provide: MAT_DIALOG_DATA, useValue: {}},
+        {
+          provide: MAT_DIALOG_DATA, useValue: {
+            title: 'Create Product',
+            product: {id: '1', number: '123', name: 'Product 1', description: 'Description', price: 123.45}
+          }
+        },
       ]
     })
       .compileComponents();

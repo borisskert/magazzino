@@ -199,7 +199,6 @@ class ProductControllerIT extends TestSetup {
         @Test
         void shouldFailWhenTryingToCreateProductWithoutNumber() throws Exception {
             var payload = new JSONObject()
-//                    .put("number", "8482392")
                     .put("name", "Product 3472312")
                     .put("description", "Description 123456")
                     .put("price", 123.45);
@@ -220,9 +219,28 @@ class ProductControllerIT extends TestSetup {
         void shouldFailWhenTryingToCreateProductWithoutName() throws Exception {
             var payload = new JSONObject()
                     .put("number", "8482392")
-//                    .put("name", "Product 3472312")
                     .put("description", "Description 123456")
                     .put("price", 123.45);
+
+            given()
+                    .contentType("application/json")
+                    .body(payload.toString())
+                    .when()
+                    .post("/api/products")
+                    .then()
+                    .statusCode(400);
+
+            List<Product> foundProducts = toList(productRepository.findAll());
+            assertThat(foundProducts).hasSize(EXPECTED_NUMBER_OF_PRODUCTS);
+        }
+
+        @Test
+        void shouldFailWhenTryingToCreateProductWithoutDescription() throws Exception {
+            var payload = new JSONObject()
+                    .put("number", "8482392")
+                    .put("name", "Product 3472312")
+                    .put("price", 123.45)
+                    ;
 
             given()
                     .contentType("application/json")
@@ -242,7 +260,6 @@ class ProductControllerIT extends TestSetup {
                     .put("number", "8482392")
                     .put("name", "Product 3472312")
                     .put("description", "Description 123456")
-//                    .put("price", 123.45)
                     ;
 
             given()
@@ -258,13 +275,12 @@ class ProductControllerIT extends TestSetup {
         }
 
         @Test
-        void shouldFailWhenTryingToCreateProductWithoutDescription() throws Exception {
+        void shouldFailWhenTryingToCreateProductWithIllegalPrice() throws Exception {
             var payload = new JSONObject()
                     .put("number", "8482392")
                     .put("name", "Product 3472312")
-//                    .put("description", "Description 123456")
-                    .put("price", 123.45)
-                    ;
+                    .put("description", "Description 123456")
+                    .put("price", "illegal");
 
             given()
                     .contentType("application/json")
@@ -276,6 +292,198 @@ class ProductControllerIT extends TestSetup {
 
             List<Product> foundProducts = toList(productRepository.findAll());
             assertThat(foundProducts).hasSize(EXPECTED_NUMBER_OF_PRODUCTS);
+        }
+
+        @Test
+        void shouldFailWhenTryingToCreateProductWithNegativePrice() throws Exception {
+            var payload = new JSONObject()
+                    .put("number", "8482392")
+                    .put("name", "Product 3472312")
+                    .put("description", "Description 123456")
+                    .put("price", -1.0);
+
+            given()
+                    .contentType("application/json")
+                    .body(payload.toString())
+                    .when()
+                    .post("/api/products")
+                    .then()
+                    .statusCode(400);
+
+            List<Product> foundProducts = toList(productRepository.findAll());
+            assertThat(foundProducts).hasSize(EXPECTED_NUMBER_OF_PRODUCTS);
+        }
+    }
+
+    @Nested
+    class UpdateProduct {
+        @Test
+        void shouldUpdateProduct() throws Exception {
+            var payload = new JSONObject()
+                    .put("number", "8482392")
+                    .put("name", "Product 67437456")
+                    .put("description", "Description 452683456")
+                    .put("price", 543.21);
+
+            given()
+                    .contentType("application/json")
+                    .body(payload.toString())
+                    .when()
+                    .put("/api/products/" + product1.getId())
+                    .then()
+                    .statusCode(204);
+
+            assertThat(productRepository.count()).isEqualTo(EXPECTED_NUMBER_OF_PRODUCTS);
+
+            Product updatedProduct = productRepository.findById(product1.getId()).orElseThrow();
+            assertThat(updatedProduct.getId()).isEqualTo(product1.getId());
+            assertThat(updatedProduct.getNumber()).isEqualTo("8482392");
+            assertThat(updatedProduct.getName()).isEqualTo("Product 67437456");
+            assertThat(updatedProduct.getDescription()).isEqualTo("Description 452683456");
+            assertThat(updatedProduct.getPrice()).isEqualTo(543.21);
+        }
+
+        @Test
+        void shouldFailWhenTryingToUpdateNotExistingProduct() throws Exception {
+            var payload = new JSONObject()
+                    .put("name", "Product 67437456")
+                    .put("description", "Description 452683456")
+                    .put("price", 543.21);
+
+            String randomUuid = "ad8c9f2f-1071-488f-be69-3ceaa359e7a8";
+
+            given()
+                    .contentType("application/json")
+                    .body(payload.toString())
+                    .when()
+                    .put("/api/products/" + randomUuid)
+                    .then()
+                    .statusCode(400);
+
+            assertThat(productRepository.count()).isEqualTo(EXPECTED_NUMBER_OF_PRODUCTS);
+        }
+
+        @Test
+        void shouldFailWhenSpecifiedProductIdIsInIllegalFormat() throws Exception {
+            var payload = new JSONObject()
+                    .put("name", "Product 67437456")
+                    .put("description", "Description 452683456")
+                    .put("price", 543.21);
+
+            given()
+                    .contentType("application/json")
+                    .body(payload.toString())
+                    .when()
+                    .put("/api/products/123")
+                    .then()
+                    .statusCode(400);
+
+            assertThat(productRepository.count()).isEqualTo(EXPECTED_NUMBER_OF_PRODUCTS);
+        }
+
+        @Test
+        void shouldFailWhenTryingToUpdateProductWithoutNumber() throws Exception {
+            var payload = new JSONObject()
+                    .put("name", "Product 67437456")
+                    .put("description", "Description 452683456")
+                    .put("price", 543.21);
+
+            given()
+                    .contentType("application/json")
+                    .body(payload.toString())
+                    .when()
+                    .put("/api/products/" + product1.getId())
+                    .then()
+                    .statusCode(400);
+
+            assertThat(productRepository.count()).isEqualTo(EXPECTED_NUMBER_OF_PRODUCTS);
+        }
+
+        @Test
+        void shouldFailWhenTryingToUpdateProductWithoutName() throws Exception {
+            var payload = new JSONObject()
+                    .put("description", "Description 452683456")
+                    .put("price", 543.21);
+
+            given()
+                    .contentType("application/json")
+                    .body(payload.toString())
+                    .when()
+                    .put("/api/products/" + product1.getId())
+                    .then()
+                    .statusCode(400);
+
+            assertThat(productRepository.count()).isEqualTo(EXPECTED_NUMBER_OF_PRODUCTS);
+        }
+
+        @Test
+        void shouldFailWhenTryingToUpdateProductWithoutDescription() throws Exception {
+            var payload = new JSONObject()
+                    .put("name", "Product 67437456")
+                    .put("price", 543.21);
+
+            given()
+                    .contentType("application/json")
+                    .body(payload.toString())
+                    .when()
+                    .put("/api/products/" + product1.getId())
+                    .then()
+                    .statusCode(400);
+
+            assertThat(productRepository.count()).isEqualTo(EXPECTED_NUMBER_OF_PRODUCTS);
+        }
+
+        @Test
+        void shouldFailWhenTryingToUpdateProductWithoutPrice() throws Exception {
+            var payload = new JSONObject()
+                    .put("name", "Product 67437456")
+                    .put("description", "Description 452683456");
+
+            given()
+                    .contentType("application/json")
+                    .body(payload.toString())
+                    .when()
+                    .put("/api/products/" + product1.getId())
+                    .then()
+                    .statusCode(400);
+
+            assertThat(productRepository.count()).isEqualTo(EXPECTED_NUMBER_OF_PRODUCTS);
+        }
+
+        @Test
+        void shouldFailWhenTryingToUpdateProductWithIllegalPrice() throws Exception {
+            var payload = new JSONObject()
+                    .put("name", "Product 67437456")
+                    .put("description", "Description 452683456")
+                    .put("price", "illegal");
+
+            given()
+                    .contentType("application/json")
+                    .body(payload.toString())
+                    .when()
+                    .put("/api/products/" + product1.getId())
+                    .then()
+                    .statusCode(400);
+
+            assertThat(productRepository.count()).isEqualTo(EXPECTED_NUMBER_OF_PRODUCTS);
+        }
+
+        @Test
+        void shouldFailWhenTryingToUpdateProductWithNegativePrice() throws Exception {
+            var payload = new JSONObject()
+                    .put("name", "Product 67437456")
+                    .put("description", "Description 452683456")
+                    .put("price", -1.0);
+
+            given()
+                    .contentType("application/json")
+                    .body(payload.toString())
+                    .when()
+                    .put("/api/products/" + product1.getId())
+                    .then()
+                    .statusCode(400);
+
+            assertThat(productRepository.count()).isEqualTo(EXPECTED_NUMBER_OF_PRODUCTS);
         }
     }
 

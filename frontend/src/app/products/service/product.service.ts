@@ -24,6 +24,11 @@ export class ProductService {
   public create(product: Product) {
     return this.httpClient.post<Product>(`${environment.backendUrl}/api/products`, product);
   }
+
+  public update(product: Product) {
+    console.log(product)
+    return this.httpClient.put<Product>(`${environment.backendUrl}/api/products/${product.id}`, product);
+  }
 }
 
 function sanitize(search: ProductSearch): any {

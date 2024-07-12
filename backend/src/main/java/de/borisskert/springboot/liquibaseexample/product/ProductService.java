@@ -7,6 +7,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.mapping.PropertyReferenceException;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class ProductService {
     private final ProductRepository productRepository;
@@ -28,6 +30,14 @@ public class ProductService {
 
     public void create(CreateProductRequest productToCreate) {
         Product entity = productToCreate.toEntity();
+        productRepository.save(entity);
+    }
+
+    public void update(UUID productId, UpdateProductRequest productToUpdate) {
+        Product entity = productRepository.findById(productId)
+                .orElseThrow(() -> new ProductNotFoundException("Product with id " + productId + " not found"));
+
+        productToUpdate.update(entity);
         productRepository.save(entity);
     }
 }

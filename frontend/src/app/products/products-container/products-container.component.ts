@@ -41,15 +41,20 @@ export class ProductsContainerComponent {
     this.dataSource.refreshSort($event);
   }
 
-  onEdit($event: Product) {
-    console.log('Edit product', $event);
-  }
-
   onCreate($event: Product) {
     this.dataSource.create($event).subscribe(
       {
         next: () => console.log('Product created'),
         error: () => console.error('Failed to create product')
+      }
+    );
+  }
+
+  onEdit($event: Product) {
+    this.dataSource.update($event).subscribe(
+      {
+        next: () => console.log('Product updated'),
+        error: () => console.error('Failed to update product')
       }
     );
   }

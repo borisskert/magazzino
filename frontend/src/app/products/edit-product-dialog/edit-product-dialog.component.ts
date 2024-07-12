@@ -19,6 +19,7 @@ export class EditProductDialogComponent {
     private readonly formBuilder: FormBuilder
   ) {
     this.form = this.formBuilder.group({
+      id: [data.id],
       number: [data.number, [Validators.required, Validators.minLength(3)]],
       name: [data.name, [Validators.required, Validators.minLength(3)]],
       description: [data.description, Validators.minLength(3)],

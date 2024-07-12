@@ -50,6 +50,12 @@ export class ProductDataSource implements DataSource<Product> {
     );
   }
 
+  public update(product: Product) {
+    return this.service.update(product).pipe(
+      switchMap(() => this.refresh())
+    );
+  }
+
   connect(_: CollectionViewer): Observable<readonly Product[]> {
     return this._products$.asObservable().pipe(
       map(page => page.content)

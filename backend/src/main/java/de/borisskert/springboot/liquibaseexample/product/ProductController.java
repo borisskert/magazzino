@@ -7,6 +7,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/api/products")
 public class ProductController {
@@ -27,5 +29,11 @@ public class ProductController {
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody @Valid CreateProductRequest productToCreate) {
         productService.create(productToCreate);
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void update(@PathVariable UUID id, @RequestBody @Valid UpdateProductRequest productToUpdate) {
+        productService.update(id, productToUpdate);
     }
 }

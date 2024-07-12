@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {CollectionViewer, DataSource} from "@angular/cdk/collections";
-import {BehaviorSubject, combineLatest, debounceTime, map, Observable, switchMap} from "rxjs";
+import {BehaviorSubject, debounceTime, map, Observable, switchMap} from "rxjs";
 import {emptyPage, Page} from "../../pagination/page";
 import {defaultProductSearch, ProductSearch} from "../model/product-search";
 import {ProductService} from "./product.service";
@@ -13,7 +13,6 @@ import {Product} from "../model/product";
 export class ProductDataSource implements DataSource<Product> {
 
   private readonly _search: BehaviorSubject<ProductSearch> = new BehaviorSubject<ProductSearch>(defaultProductSearch());
-  private readonly _sort: BehaviorSubject<Sort> = new BehaviorSubject<Sort>({active: 'id', direction: 'asc'});
   private readonly _products$: BehaviorSubject<Page<Product>> = new BehaviorSubject<Page<Product>>(emptyPage());
 
   constructor(private readonly service: ProductService) {
@@ -38,6 +37,7 @@ export class ProductDataSource implements DataSource<Product> {
   }
 
   public refreshSort(sort: Sort) {
+
     this.refreshSearch({
       ...this._search.getValue(),
       sort: sort
@@ -74,14 +74,10 @@ export class ProductDataSource implements DataSource<Product> {
   }
 
   private setupSearchSubscription() {
-    combineLatest([
-      this._search,
-      this._sort
-    ]).pipe(
+    this._search.pipe(
       debounceTime(200),
-      switchMap(([search, sort]) => this.service.search({
+      switchMap((search) => this.service.search({
         ...search,
-        sort: sort
       }))
     ).subscribe(page => this._products$.next(page));
   }

@@ -12,7 +12,7 @@
   <packaging>pom</packaging>
 
   <build>
-    <finalName>${artifactId}</finalName>
+    <finalName>${project.artifactId}</finalName>
 
     <resources>
       <resource>

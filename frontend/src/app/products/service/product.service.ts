@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Product} from "../../shopping-cart/model/product";
 import {Page} from "../../pagination/page";
 import {ProductSearch} from "../model/product-search";
 import {environment} from "../../../environments/environment";
+import {Product} from "../model/product";
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +14,20 @@ export class ProductService {
   }
 
   public search(search: ProductSearch) {
-    console.log('search', search)
     return this.httpClient.get<Page<Product>>(`${environment.backendUrl}/api/products/search`, {
       params: {
         ...sanitize(search),
       } as any,
     });
+  }
+
+  public create(product: Product) {
+    return this.httpClient.post<Product>(`${environment.backendUrl}/api/products`, product);
+  }
+
+  public update(product: Product) {
+    console.log(product)
+    return this.httpClient.put<Product>(`${environment.backendUrl}/api/products/${product.id}`, product);
   }
 }
 

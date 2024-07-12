@@ -49,7 +49,7 @@ public class ProductSpecification implements Specification<Product> {
         return number == null ? criteriaBuilder.conjunction() : criteriaBuilder.equal(root.get("number"), number);
     }
 
-    public static Specification<Product> from(ProductSearchDto search) {
+    public static Specification<Product> from(ProductSearchRequest search) {
         return new ProductSpecification(search.name(), search.number(), search.description());
     }
 }

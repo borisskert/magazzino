@@ -9,12 +9,17 @@ import {ProductsContainerComponent} from "./products-container/products-containe
 import {ProductListComponent} from "./product-list/product-list.component";
 import {ProductFilterComponent} from "./product-filter/product-filter.component";
 import {MatSortModule} from "@angular/material/sort";
+import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
+import {EditProductDialogComponent} from "./edit-product-dialog/edit-product-dialog.component";
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
     ProductsContainerComponent,
     ProductListComponent,
     ProductFilterComponent,
+    EditProductDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -25,6 +30,9 @@ import {MatSortModule} from "@angular/material/sort";
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatIconModule,
+    MatDialogModule,
+    MatButtonModule,
   ]
 })
 export class ProductsModule {

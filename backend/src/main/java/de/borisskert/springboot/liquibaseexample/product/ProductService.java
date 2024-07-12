@@ -25,4 +25,9 @@ public class ProductService {
             throw new ProductSearchException(e);
         }
     }
+
+    public void create(CreateProductRequest productToCreate) {
+        Product entity = productToCreate.toEntity();
+        productRepository.save(entity);
+    }
 }

@@ -92,7 +92,7 @@ public class TestSetup {
     }
 
     @Autowired
-    private ProductRepository productRepository;
+    protected ProductRepository productRepository;
 
     private Product createProduct(String number, String name, String description, double price) {
         return productRepository.findByNumber(number).orElseGet(

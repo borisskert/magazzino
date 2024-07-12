@@ -1,5 +1,6 @@
 package de.borisskert.springboot.liquibaseexample.product;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,7 +25,7 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@RequestBody CreateProductRequest productToCreate) {
+    public void create(@RequestBody @Valid CreateProductRequest productToCreate) {
         productService.create(productToCreate);
     }
 }

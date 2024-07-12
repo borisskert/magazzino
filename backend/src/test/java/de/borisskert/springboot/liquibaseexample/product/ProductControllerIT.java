@@ -195,6 +195,88 @@ class ProductControllerIT extends TestSetup {
             assertThat(createdProduct.getDescription()).isEqualTo("Description 123456");
             assertThat(createdProduct.getPrice()).isEqualTo(123.45);
         }
+
+        @Test
+        void shouldFailWhenTryingToCreateProductWithoutNumber() throws Exception {
+            var payload = new JSONObject()
+//                    .put("number", "8482392")
+                    .put("name", "Product 3472312")
+                    .put("description", "Description 123456")
+                    .put("price", 123.45);
+
+            given()
+                    .contentType("application/json")
+                    .body(payload.toString())
+                    .when()
+                    .post("/api/products")
+                    .then()
+                    .statusCode(400);
+
+            List<Product> foundProducts = toList(productRepository.findAll());
+            assertThat(foundProducts).hasSize(EXPECTED_NUMBER_OF_PRODUCTS);
+        }
+
+        @Test
+        void shouldFailWhenTryingToCreateProductWithoutName() throws Exception {
+            var payload = new JSONObject()
+                    .put("number", "8482392")
+//                    .put("name", "Product 3472312")
+                    .put("description", "Description 123456")
+                    .put("price", 123.45);
+
+            given()
+                    .contentType("application/json")
+                    .body(payload.toString())
+                    .when()
+                    .post("/api/products")
+                    .then()
+                    .statusCode(400);
+
+            List<Product> foundProducts = toList(productRepository.findAll());
+            assertThat(foundProducts).hasSize(EXPECTED_NUMBER_OF_PRODUCTS);
+        }
+
+        @Test
+        void shouldFailWhenTryingToCreateProductWithoutPrice() throws Exception {
+            var payload = new JSONObject()
+                    .put("number", "8482392")
+                    .put("name", "Product 3472312")
+                    .put("description", "Description 123456")
+//                    .put("price", 123.45)
+                    ;
+
+            given()
+                    .contentType("application/json")
+                    .body(payload.toString())
+                    .when()
+                    .post("/api/products")
+                    .then()
+                    .statusCode(400);
+
+            List<Product> foundProducts = toList(productRepository.findAll());
+            assertThat(foundProducts).hasSize(EXPECTED_NUMBER_OF_PRODUCTS);
+        }
+
+        @Test
+        void shouldFailWhenTryingToCreateProductWithoutDescription() throws Exception {
+            var payload = new JSONObject()
+                    .put("number", "8482392")
+                    .put("name", "Product 3472312")
+//                    .put("description", "Description 123456")
+                    .put("price", 123.45)
+                    ;
+
+            given()
+                    .contentType("application/json")
+                    .body(payload.toString())
+                    .when()
+                    .post("/api/products")
+                    .then()
+                    .statusCode(400);
+
+            List<Product> foundProducts = toList(productRepository.findAll());
+            assertThat(foundProducts).hasSize(EXPECTED_NUMBER_OF_PRODUCTS);
+        }
     }
 
     @AfterEach

@@ -1,0 +1,110 @@
+{
+  "id": "magazzino",
+  "realm": "magazzino",
+  "displayName": "magazzino Realm",
+  "authenticationFlows": [
+  ],
+  "roles": {
+    "realm": [
+      {
+        "name": "customer",
+        "description": "Customer privileges"
+      },
+      {
+        "name": "admin",
+        "description": "Administrator privileges"
+      },
+      {
+        "name": "employee",
+        "description": "Employee privileges"
+      }
+    ],
+    "client": {
+      "magazzino-client": [
+        {
+          "name": "customer",
+          "description": "Customer privileges"
+        },
+        {
+          "name": "admin",
+          "description": "Administrator privileges"
+        },
+        {
+          "name": "employee",
+          "description": "Employee privileges"
+        }
+      ]
+    }
+  },
+  "scopeMappings": [
+  ],
+  "users": [
+    {
+      "username": "admin",
+      "enabled": true,
+      "realmRoles": [
+        "admin"
+      ],
+      "clientRoles": {
+        "magazzino-client": [
+          "admin"
+        ]
+      },
+      "credentials": [
+        {
+          "type": "password",
+          "value": "admin123"
+        }
+      ]
+    }
+  ],
+  "clients": [
+    {
+      "clientId": "magazzino-client",
+      "name": "magazzino-client",
+      "description": "magazzino-Client",
+      "enabled": true,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "my-special-client-secret",
+      "redirectUris": [
+        "*"
+      ],
+      "webOrigins": [
+        "*"
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "name": "Admin Group",
+      "attributes": {
+      },
+      "realmRoles": [
+        "admin"
+      ],
+      "clientRoles": {
+        "magazzino-client": [
+          "admin"
+        ]
+      },
+      "subGroups": [
+      ]
+    },
+    {
+      "name": "Customer role",
+      "realmRoles": [
+        "customer"
+      ]
+    },
+    {
+      "name": "Employee role",
+      "clientRoles": {
+        "magazzino-client": [
+          "employee"
+        ]
+      }
+    }
+  ],
+  "requiredActions": [],
+  "authenticatorConfig": []
+}

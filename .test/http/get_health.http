@@ -1,0 +1,10 @@
+### Get health
+GET http://{{server_hostname}}:8080/actuator/health
+
+> {%
+    client.test('Should be up', function () {
+        client.assert(response.status === 200, 'Response status was ' + response.status);
+        client.assert(response.body !== undefined, 'Response status was undefined');
+        client.assert(response.body.status === 'UP', "Response status was '" + response.body);
+    });
+%}

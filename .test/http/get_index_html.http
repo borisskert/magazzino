@@ -1,0 +1,10 @@
+#### Get health
+GET http://{{server_hostname}}:8080/index.html
+
+> {%
+    client.test('Should provide index.html', function () {
+        client.assert(response.status === 200, 'Response status was ' + response.status);
+        client.assert(response.body !== undefined, 'Response status was undefined');
+        client.assert(response.body.substring(0, 15) === '<!doctype html>', "Response body was '" + response.body);
+    });
+%}

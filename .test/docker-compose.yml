@@ -1,5 +1,5 @@
 ---
-name: magazzino_local_setup
+name: magazzino_infra_test
 
 services:
   db:
@@ -8,10 +8,6 @@ services:
       POSTGRES_DB: magazzino_db
       POSTGRES_USER: magazzino_user
       POSTGRES_PASSWORD: magazzino_pass
-    ports:
-      - "5432:5432"
-    volumes:
-      - 'db_data:/var/lib/postgresql/data'
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U magazzino_user -d magazzino_db" ]
       interval: 1s
@@ -27,8 +23,6 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    ports:
-      - "8080:8080"
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/magazzino_db
       SPRING_DATASOURCE_USERNAME: magazzino_user
@@ -40,5 +34,15 @@ services:
       start_period: 0s
       timeout: 1s
 
-volumes:
-  db_data:
+  tests:
+    image: jetbrains/intellij-http-client
+    depends_on:
+      magazzino:
+        condition: service_healthy
+    volumes:
+      - '.:/workdir'
+    command:
+      - '-edocker-compose'
+      - '-vhttp/http-client.env.json'
+      - './http/get_health.http'
+      - './http/get_index_html.http'

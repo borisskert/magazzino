@@ -1,5 +1,6 @@
 package de.borisskert.magazzino.shoppingcart;
 
+import de.borisskert.magazzino.security.EmployeeAccess;
 import de.borisskert.magazzino.shoppingcart.search.ShoppingCartSearch;
 import de.borisskert.magazzino.shoppingcart.search.ShoppingCartSearchResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ public class ShoppingCartController {
     }
 
     @GetMapping("/search")
+    @EmployeeAccess
     public Page<ShoppingCartSearchResult> search(ShoppingCartSearch search, Pageable pageable) {
         return shoppingCartService.search(search, pageable)
                 .map(ShoppingCartSearchResult::fromEntity);

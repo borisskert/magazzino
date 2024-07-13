@@ -2,6 +2,7 @@ package de.borisskert.magazzino;
 
 import de.borisskert.magazzino.person.Person;
 import de.borisskert.magazzino.person.PersonRepository;
+import de.borisskert.magazzino.security.Role;
 import de.borisskert.magazzino.product.Product;
 import de.borisskert.magazzino.product.ProductRepository;
 import de.borisskert.magazzino.shoppingcart.persistence.ShoppingCart;
@@ -53,14 +54,14 @@ public class TestSetup {
     }
 
     private void setupCustomers() {
-        person1 = createCustomer("alice", "Alice", "Wonderland", "alice@wonderland.org", LocalDate.of(1980, 1, 12), Person.Role.CUSTOMER);
-        person2 = createCustomer("bob", "Bob", "Marley", "bob@marley.org", LocalDate.of(1970, 2, 23), Person.Role.CUSTOMER);
-        person3 = createCustomer("charlie", "Charlie", "Brown", "charlie@brown.org", LocalDate.of(1960, 3, 30), Person.Role.CUSTOMER);
-        person4 = createCustomer("dave", "Dave", "Smith", "dave@smith.org", LocalDate.of(1950, 4, 14), Person.Role.CUSTOMER);
-        person5 = createCustomer("eve", "Eve", "Jackson", "eve@jackson.org", LocalDate.of(1940, 5, 15), Person.Role.CUSTOMER);
+        person1 = createCustomer("alice", "Alice", "Wonderland", "alice@wonderland.org", LocalDate.of(1980, 1, 12), Role.CUSTOMER);
+        person2 = createCustomer("bob", "Bob", "Marley", "bob@marley.org", LocalDate.of(1970, 2, 23), Role.CUSTOMER);
+        person3 = createCustomer("charlie", "Charlie", "Brown", "charlie@brown.org", LocalDate.of(1960, 3, 30), Role.CUSTOMER);
+        person4 = createCustomer("dave", "Dave", "Smith", "dave@smith.org", LocalDate.of(1950, 4, 14), Role.CUSTOMER);
+        person5 = createCustomer("eve", "Eve", "Jackson", "eve@jackson.org", LocalDate.of(1940, 5, 15), Role.CUSTOMER);
     }
 
-    private Person createCustomer(String username, String firstName, String lastName, String email, LocalDate birthDate, Person.Role role) {
+    private Person createCustomer(String username, String firstName, String lastName, String email, LocalDate birthDate, Role role) {
         return personRepository.findByUsername(username).orElseGet(
                 () -> {
                     Person person = new Person();

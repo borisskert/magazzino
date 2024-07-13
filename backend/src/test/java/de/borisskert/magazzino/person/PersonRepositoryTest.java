@@ -1,5 +1,6 @@
 package de.borisskert.magazzino.person;
 
+import de.borisskert.magazzino.security.Role;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ class PersonRepositoryTest {
         person.setFirstName("John");
         person.setLastName("Doe");
         person.setEmail("john.doe@gmail.com");
-        person.setRole(Person.Role.USER);
+        person.setRole(Role.EMPLOYEE);
         person.setBirthdate(LocalDate.parse("1980-11-15"));
 
         Person savedPerson = personRepository.save(person);
@@ -38,7 +39,7 @@ class PersonRepositoryTest {
         assertThat(savedPerson.getFirstName()).isEqualTo("John");
         assertThat(savedPerson.getLastName()).isEqualTo("Doe");
         assertThat(savedPerson.getEmail()).isEqualTo("john.doe@gmail.com");
-        assertThat(savedPerson.getRole()).isEqualTo(Person.Role.USER);
+        assertThat(savedPerson.getRole()).isEqualTo(Role.EMPLOYEE);
         assertThat(savedPerson.getBirthdate()).isEqualTo(LocalDate.parse("1980-11-15"));
 
         Person foundPerson = personRepository.findById(savedPerson.getId()).orElseThrow();
@@ -48,7 +49,7 @@ class PersonRepositoryTest {
         assertThat(foundPerson.getFirstName()).isEqualTo("John");
         assertThat(foundPerson.getLastName()).isEqualTo("Doe");
         assertThat(foundPerson.getEmail()).isEqualTo("john.doe@gmail.com");
-        assertThat(foundPerson.getRole()).isEqualTo(Person.Role.USER);
+        assertThat(foundPerson.getRole()).isEqualTo(Role.EMPLOYEE);
         assertThat(foundPerson.getBirthdate()).isEqualTo(LocalDate.parse("1980-11-15"));
     }
 

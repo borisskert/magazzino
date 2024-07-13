@@ -1,5 +1,6 @@
 package de.borisskert.magazzino.person;
 
+import de.borisskert.magazzino.security.Role;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -71,9 +72,5 @@ public class Person {
 
     public void setRole(Role role) {
         this.role = role;
-    }
-
-    public enum Role {
-        ADMIN, USER, CUSTOMER
     }
 }

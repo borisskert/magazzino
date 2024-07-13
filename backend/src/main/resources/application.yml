@@ -5,3 +5,30 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
+
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: magazzino-client
+            client-secret: my-special-client-secret
+#            client-id: moped-client
+#            client-secret: NCELOyOuvDWPOZYc90bXN64C03pzFYto
+            authorization-grant-type: authorization_code
+            scope: openid
+        provider:
+          keycloak:
+            user-name-attribute: preferred_username
+            issuer-uri: http://localhost:8081/realms/magazzino
+            jwk-set-uri: http://localhost:8081/realms/magazzino/protocol/openid-connect/certs
+            user-info-uri: http://localhost:8081/realms/magazzino/protocol/openid-connect/userinfo
+
+#            issuer-uri: http://localhost:8081/realms/moped
+#            jwk-set-uri: http://localhost:8081/realms/moped/protocol/openid-connect/certs
+#            user-info-uri: http://localhost:8081/realms/moped/protocol/openid-connect/userinfo
+
+      resourceserver:
+        jwt:
+#          issuer-uri: http://localhost:8081/realms/moped
+          issuer-uri: http://localhost:8081/realms/magazzino

@@ -2,58 +2,71 @@
   "id": "magazzino",
   "realm": "magazzino",
   "displayName": "magazzino Realm",
+  "enabled": true,
   "authenticationFlows": [
   ],
   "roles": {
     "realm": [
       {
-        "name": "customer",
-        "description": "Customer privileges"
+        "name": "customer"
       },
       {
-        "name": "admin",
-        "description": "Administrator privileges"
+        "name": "admin"
       },
       {
-        "name": "employee",
-        "description": "Employee privileges"
+        "name": "employee"
       }
-    ],
-    "client": {
-      "magazzino-client": [
-        {
-          "name": "customer",
-          "description": "Customer privileges"
-        },
-        {
-          "name": "admin",
-          "description": "Administrator privileges"
-        },
-        {
-          "name": "employee",
-          "description": "Employee privileges"
-        }
-      ]
-    }
+    ]
   },
-  "scopeMappings": [
-  ],
   "users": [
     {
-      "username": "admin",
+      "username": "my-admin",
       "enabled": true,
+      "emailVerified": true,
+      "firstName": "Admin",
+      "lastName": "Admin",
+      "email": "admin@magazzino",
       "realmRoles": [
         "admin"
       ],
-      "clientRoles": {
-        "magazzino-client": [
-          "admin"
-        ]
-      },
       "credentials": [
         {
           "type": "password",
-          "value": "admin123"
+          "value": "pass123"
+        }
+      ]
+    },
+    {
+      "username": "my-employee",
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "My",
+      "lastName": "Employee",
+      "email": "my-employee@magazzino",
+      "realmRoles": [
+        "employee"
+      ],
+      "credentials": [
+        {
+          "type": "password",
+          "value": "pass123"
+        }
+      ]
+    },
+    {
+      "username": "my-customer",
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "My",
+      "lastName": "Customer",
+      "email": "my-customer@magazzino",
+      "realmRoles": [
+        "customer"
+      ],
+      "credentials": [
+        {
+          "type": "password",
+          "value": "pass123"
         }
       ]
     }
@@ -66,45 +79,32 @@
       "enabled": true,
       "clientAuthenticatorType": "client-secret",
       "secret": "my-special-client-secret",
+      "protocol": "openid-connect",
       "redirectUris": [
         "*"
       ],
       "webOrigins": [
         "*"
-      ]
-    }
-  ],
-  "groups": [
-    {
-      "name": "Admin Group",
-      "attributes": {
-      },
-      "realmRoles": [
-        "admin"
       ],
-      "clientRoles": {
-        "magazzino-client": [
-          "admin"
-        ]
-      },
-      "subGroups": [
+      "consentRequired": false,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "frontchannelLogout": true,
+      "defaultClientScopes": [
+        "web-origins",
+        "acr",
+        "profile",
+        "roles",
+        "basic",
+        "email",
+        "microprofile-jwt"
+      ],
+      "optionalClientScopes": [
+        "address",
+        "phone",
+        "offline_access"
       ]
-    },
-    {
-      "name": "Customer role",
-      "realmRoles": [
-        "customer"
-      ]
-    },
-    {
-      "name": "Employee role",
-      "clientRoles": {
-        "magazzino-client": [
-          "employee"
-        ]
-      }
     }
-  ],
-  "requiredActions": [],
-  "authenticatorConfig": []
+  ]
 }

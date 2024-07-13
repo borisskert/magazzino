@@ -2,6 +2,7 @@ package de.borisskert.magazzino.shoppingcart;
 
 import de.borisskert.magazzino.person.Person;
 import de.borisskert.magazzino.person.PersonRepository;
+import de.borisskert.magazzino.security.Role;
 import de.borisskert.magazzino.product.Product;
 import de.borisskert.magazzino.product.ProductRepository;
 import de.borisskert.magazzino.shoppingcart.persistence.ShoppingCart;
@@ -134,7 +135,7 @@ class ShoppingCartServiceTest {
         person.setFirstName("John");
         person.setLastName("Doe");
         person.setEmail("john.doe@gmail.com");
-        person.setRole(Person.Role.USER);
+        person.setRole(Role.EMPLOYEE);
         person.setBirthdate(LocalDate.parse("1980-11-15"));
 
         return personRepository.save(person);

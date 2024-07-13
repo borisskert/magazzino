@@ -33,8 +33,6 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/magazzino_db
       SPRING_DATASOURCE_USERNAME: magazzino_user
       SPRING_DATASOURCE_PASSWORD: magazzino_pass
-
-# Provide actuator endpoints for health checks
     healthcheck:
       test: [ "CMD", "curl", "--fail", "--silent", "localhost:8080/actuator/health" ]
       interval: 1s

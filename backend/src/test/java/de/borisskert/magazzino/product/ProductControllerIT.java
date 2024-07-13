@@ -312,6 +312,23 @@ class ProductControllerIT extends TestSetup {
             List<Product> foundProducts = Utils.toList(productRepository.findAll());
             Assertions.assertThat(foundProducts).hasSize(EXPECTED_NUMBER_OF_PRODUCTS);
         }
+
+        @Test
+        void shouldFailWhenTryingToCreateProductWithConflictingName() throws Exception {
+            var payload = new JSONObject()
+                    .put("number", "8482392")
+                    .put("name", "Product 1")
+                    .put("description", "Description 123456")
+                    .put("price", 123.45);
+
+            given()
+                    .contentType("application/json")
+                    .body(payload.toString())
+                    .when()
+                    .post("/api/products")
+                    .then()
+                    .statusCode(409);
+        }
     }
 
     @Nested

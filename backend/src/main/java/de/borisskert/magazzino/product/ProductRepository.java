@@ -14,4 +14,6 @@ public interface ProductRepository extends CrudRepository<Product, UUID> {
     Optional<Product> findByNumber(String number);
 
     Page<Product> findAll(Specification<Product> specification, Pageable pageable);
+
+    boolean existsByName(String name);
 }

@@ -1,5 +1,6 @@
 package de.borisskert.magazzino.product;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,7 +29,14 @@ public class ProductService {
         }
     }
 
+    @Transactional
     public void create(CreateProductRequest productToCreate) {
+        if (productRepository.existsByName(productToCreate.name())) {
+            throw new ProductAlreadyExistsException(
+                    "Product with name '" + productToCreate.name() + "' already exists"
+            );
+        }
+
         Product entity = productToCreate.toEntity();
         productRepository.save(entity);
     }

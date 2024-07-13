@@ -10,11 +10,11 @@
         <relativePath/>
     </parent>
 
-    <groupId>de.borisskert.springboot</groupId>
+    <groupId>de.borisskert.magazzino</groupId>
     <artifactId>backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Liquibase Example (Backend)</name>
-    <description>Demo project how to use liquibase in Spring Boot</description>
+    <name>magazzino (Backend)</name>
+    <description>magazzino Demo project</description>
 
     <properties>
         <java.version>21</java.version>
@@ -104,7 +104,7 @@
     </dependencies>
 
     <build>
-        <finalName>${artifactId}</finalName>
+        <finalName>${project.artifactId}</finalName>
 
         <plugins>
             <plugin>

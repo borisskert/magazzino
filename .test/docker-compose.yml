@@ -45,3 +45,4 @@ services:
       - '-edocker-compose'
       - '-vhttp/http-client.env.json'
       - './http/get_health.http'
+      - './http/get_index_html.http'

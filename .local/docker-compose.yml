@@ -1,0 +1,46 @@
+---
+name: magazzino_local_setup
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: magazzino_db
+      POSTGRES_USER: magazzino_user
+      POSTGRES_PASSWORD: magazzino_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - 'db_data:/var/lib/postgresql/data'
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U magazzino_user -d magazzino_db" ]
+      interval: 1s
+      retries: 100
+      start_period: 0s
+      timeout: 1s
+
+  magazzino:
+    image: borisskert/magazzino
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/magazzino_db
+      SPRING_DATASOURCE_USERNAME: magazzino_user
+      SPRING_DATASOURCE_PASSWORD: magazzino_pass
+
+# Provide actuator endpoints for health checks
+    healthcheck:
+      test: [ "CMD", "curl", "--fail", "--silent", "localhost:8080/actuator/health" ]
+      interval: 1s
+      retries: 100
+      start_period: 0s
+      timeout: 1s
+
+volumes:
+  db_data:

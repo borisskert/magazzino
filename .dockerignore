@@ -1,0 +1,13 @@
+.idea/
+.local/
+.run/
+.vscode/
+Dockerfile
+.dockerignore
+
+backend/target
+
+frontend/node_modules
+frontend/dist
+frontend/.angular
+frontend/target

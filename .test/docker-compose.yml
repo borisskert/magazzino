@@ -1,0 +1,47 @@
+---
+name: magazzino_infra_test
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: magazzino_db
+      POSTGRES_USER: magazzino_user
+      POSTGRES_PASSWORD: magazzino_pass
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U magazzino_user -d magazzino_db" ]
+      interval: 1s
+      retries: 100
+      start_period: 0s
+      timeout: 1s
+
+  magazzino:
+    image: borisskert/magazzino
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/magazzino_db
+      SPRING_DATASOURCE_USERNAME: magazzino_user
+      SPRING_DATASOURCE_PASSWORD: magazzino_pass
+    healthcheck:
+      test: [ "CMD", "curl", "--fail", "--silent", "localhost:8080/actuator/health" ]
+      interval: 1s
+      retries: 100
+      start_period: 0s
+      timeout: 1s
+
+  tests:
+    image: jetbrains/intellij-http-client
+    depends_on:
+      magazzino:
+        condition: service_healthy
+    volumes:
+      - '.:/workdir'
+    command:
+      - '-edocker-compose'
+      - '-vhttp/http-client.env.json'
+      - './http/get_health.http'

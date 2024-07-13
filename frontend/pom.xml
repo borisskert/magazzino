@@ -28,8 +28,8 @@
         <version>1.15.0</version>
         <configuration>
           <workingDirectory>./</workingDirectory>
-          <nodeVersion>v20.11.1</nodeVersion>
-          <npmVersion>10.5.0</npmVersion>
+          <nodeVersion>v20.15.1</nodeVersion>
+          <npmVersion>10.8.0</npmVersion>
         </configuration>
       </plugin>
     </plugins>

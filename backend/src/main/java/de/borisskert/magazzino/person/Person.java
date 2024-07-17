@@ -18,6 +18,7 @@ public class Person {
     private LocalDate birthdate;
 
     @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "VARCHAR(255)")
     private Role role;
 
     public Long getId() {

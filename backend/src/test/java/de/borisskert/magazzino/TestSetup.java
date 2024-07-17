@@ -108,11 +108,11 @@ public class TestSetup {
     }
 
     private void setupShoppingCarts() {
-        shoppingCart1 = createShoppingCart(person1, Map.of(product1, 1L, product2, 2L, product3, 3L)); // 1 * 12.34 + 2 * 23.45 + 3 * 34.56 = 162.92
-        shoppingCart2 = createShoppingCart(person2, Map.of(product4, 4L, product5, 5L, product6, 6L)); // 4 * 45.67 + 5 * 56.78 + 6 * 67.89 = 873.92
-        shoppingCart3 = createShoppingCart(person3, Map.of(product7, 7L, product8, 8L, product9, 9L)); // 7 * 78.90 + 8 * 89.01 + 9 * 90.12 = 2075.46
-        shoppingCart4 = createShoppingCart(person4, Map.of(product10, 10L, product11, 11L, product12, 12L)); // 10 x 122.23 + 11 x 222.34 + 12 x 334.45 = 7681.44
-        shoppingCart5 = createShoppingCart(person5, Map.of(product1, 1L, product2, 2L, product3, 3L)); // 1 * 12.34 + 2 * 23.45 + 3 * 34.56 = 162.92
+        shoppingCart1 = createShoppingCart(person1, Map.of(product1, 2L, product2, 2L, product3, 3L));
+        shoppingCart2 = createShoppingCart(person2, Map.of(product4, 4L, product5, 5L, product6, 6L));
+        shoppingCart3 = createShoppingCart(person3, Map.of(product7, 7L, product8, 8L, product9, 9L));
+        shoppingCart4 = createShoppingCart(person4, Map.of(product10, 10L, product11, 11L, product12, 12L));
+        shoppingCart5 = createShoppingCart(person5, Map.of(product1, 1L, product2, 2L, product3, 3L));
     }
 
     private ShoppingCart createShoppingCart(Person person, Map<Product, Long> productsWithQuantity) {

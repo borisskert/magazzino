@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Entity
@@ -23,7 +24,7 @@ public class Product {
 
     private String description;
 
-    private Double price;
+    private BigDecimal price;
 
     public UUID getId() {
         return id;
@@ -54,10 +55,10 @@ public class Product {
     }
 
     public Double getPrice() {
-        return price;
+        return price.doubleValue();
     }
 
     public void setPrice(Double price) {
-        this.price = price;
+        this.price = BigDecimal.valueOf(price);
     }
 }

@@ -1,3 +1,7 @@
 spring:
   application:
     name: magazzino
+
+  jpa:
+    hibernate:
+      ddl-auto: validate

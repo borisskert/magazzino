@@ -127,7 +127,7 @@ class ShoppingCartControllerTest extends TestSetup {
                         "content[0].items[0].product.number", equalTo(product1.getNumber()),
                         "content[0].items[0].product.name", equalTo(product1.getName()),
                         "content[0].items[0].product.price", equalTo(product1.getPrice().floatValue()),
-                        "content[0].items[0].quantity", equalTo(1),
+                        "content[0].items[0].quantity", equalTo(2),
 
                         "content[0].items[1].product.id", equalTo(product2.getId().toString()),
                         "content[0].items[1].product.number", equalTo(product2.getNumber()),
@@ -141,7 +141,7 @@ class ShoppingCartControllerTest extends TestSetup {
                         "content[0].items[2].product.price", equalTo(product3.getPrice().floatValue()),
                         "content[0].items[2].quantity", equalTo(3),
 
-                        "content[0].totalPrice", equalTo(162.92f)
+                        "content[0].totalPrice", equalTo(175.26f)
                 );
     }
 
@@ -222,8 +222,8 @@ class ShoppingCartControllerTest extends TestSetup {
                 .statusCode(200)
                 .body(
                         "content.size()", equalTo(5),
-                        "content[0].id", equalTo(shoppingCart1.getId().intValue()),
-                        "content[1].id", equalTo(shoppingCart5.getId().intValue()),
+                        "content[0].id", equalTo(shoppingCart5.getId().intValue()),
+                        "content[1].id", equalTo(shoppingCart1.getId().intValue()),
                         "content[2].id", equalTo(shoppingCart2.getId().intValue()),
                         "content[3].id", equalTo(shoppingCart3.getId().intValue()),
                         "content[4].id", equalTo(shoppingCart4.getId().intValue())

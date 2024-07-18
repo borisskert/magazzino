@@ -19,7 +19,7 @@ databaseChangeLog:
                   type: boolean
                   constraints:
                     nullable: false
-                    
+
               - column:
                   name: customer_id
                   type: bigint
@@ -28,7 +28,7 @@ databaseChangeLog:
                       foreignKeyName: fk_shopping_cart_customer_id
                       references: person(id)
 
-        - createTable: 
+        - createTable:
             tableName: shopping_cart_item
             columns:
               - column:
@@ -41,7 +41,7 @@ databaseChangeLog:
 
               - column:
                   name: quantity
-                  type: int
+                  type: bigint
                   constraints:
                     nullable: false
 
@@ -52,7 +52,7 @@ databaseChangeLog:
                     nullable: false
                     foreignKeyName: fk_shopping_cart_item_product_id
                     references: product(id)
-                    
+
               - column:
                   name: shopping_cart_id
                   type: bigint

@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1721480533
+      author: bs
+      changes:
+        - dropColumn:
+            tableName: person
+            columnName: birthdate
+
+        - dropColumn:
+            tableName: person
+            columnName: username

@@ -2,9 +2,9 @@ package de.borisskert.magazzino;
 
 import de.borisskert.magazzino.person.Person;
 import de.borisskert.magazzino.person.PersonRepository;
-import de.borisskert.magazzino.security.Role;
 import de.borisskert.magazzino.product.Product;
 import de.borisskert.magazzino.product.ProductRepository;
+import de.borisskert.magazzino.security.Role;
 import de.borisskert.magazzino.shoppingcart.persistence.ShoppingCart;
 import de.borisskert.magazzino.shoppingcart.persistence.ShoppingCartRepository;
 import io.restassured.RestAssured;
@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.time.LocalDate;
 import java.util.Map;
 
 import static io.restassured.parsing.Parser.JSON;
@@ -54,26 +53,27 @@ public class TestSetup {
     }
 
     private void setupCustomers() {
-        person1 = createCustomer("alice", "Alice", "Wonderland", "alice@wonderland.org", LocalDate.of(1980, 1, 12), Role.CUSTOMER);
-        person2 = createCustomer("bob", "Bob", "Marley", "bob@marley.org", LocalDate.of(1970, 2, 23), Role.CUSTOMER);
-        person3 = createCustomer("charlie", "Charlie", "Brown", "charlie@brown.org", LocalDate.of(1960, 3, 30), Role.CUSTOMER);
-        person4 = createCustomer("dave", "Dave", "Smith", "dave@smith.org", LocalDate.of(1950, 4, 14), Role.CUSTOMER);
-        person5 = createCustomer("eve", "Eve", "Jackson", "eve@jackson.org", LocalDate.of(1940, 5, 15), Role.CUSTOMER);
+        person1 = createCustomer("Alice", "Wonderland", "alice@wonderland.org", Role.CUSTOMER, "28fa8758-b5c6-42b4-aefd-bab52a7d02fd");
+        person2 = createCustomer("Bob", "Marley", "bob@marley.org", Role.CUSTOMER, "a29ee5ff-f19e-421b-89b9-a23689746e9b");
+        person3 = createCustomer("Charlie", "Brown", "charlie@brown.org", Role.CUSTOMER, "a55c693c-a27f-4506-9ba3-8a3e3601aa9a");
+        person4 = createCustomer("Dave", "Smith", "dave@smith.org", Role.CUSTOMER, "9380153d-5a71-4ed0-b908-57bb98b1a697");
+        person5 = createCustomer("Eve", "Jackson", "eve@jackson.org", Role.CUSTOMER, "78677014-6567-422f-828d-f1c24a1124a8");
     }
 
-    private Person createCustomer(String username, String firstName, String lastName, String email, LocalDate birthDate, Role role) {
-        return personRepository.findByUsername(username).orElseGet(
-                () -> {
-                    Person person = new Person();
-                    person.setUsername(username);
-                    person.setFirstName(firstName);
-                    person.setLastName(lastName);
-                    person.setEmail(email);
-                    person.setBirthdate(birthDate);
-                    person.setRole(role);
-                    return personRepository.save(person);
-                }
-        );
+    private Person createCustomer(String firstName, String lastName, String email, Role role, String authIdentifier) {
+        return personRepository.findByAuthIdentifier(authIdentifier)
+                .orElseGet(
+                        () -> {
+                            Person person = new Person();
+                            person.setFirstName(firstName);
+                            person.setLastName(lastName);
+                            person.setEmail(email);
+                            person.setRole(role);
+                            person.setAuthIdentifier(authIdentifier);
+
+                            return personRepository.save(person);
+                        }
+                );
     }
 
     private void setupProducts() {

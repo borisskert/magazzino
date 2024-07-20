@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1721480090
+      author: bs
+      changes:
+        - addColumn:
+            tableName: person
+            columns:
+              - column:
+                  name: auth_identifier
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true

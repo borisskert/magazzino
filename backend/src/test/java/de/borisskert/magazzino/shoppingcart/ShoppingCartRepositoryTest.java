@@ -12,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.time.LocalDate;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
@@ -85,12 +83,10 @@ class ShoppingCartRepositoryTest {
 
     private Person setupPerson() {
         Person person = new Person();
-        person.setUsername("johndoe");
         person.setFirstName("John");
         person.setLastName("Doe");
         person.setEmail("john.doe@gmail.com");
         person.setRole(Role.EMPLOYEE);
-        person.setBirthdate(LocalDate.parse("1980-11-15"));
 
         return personRepository.save(person);
     }

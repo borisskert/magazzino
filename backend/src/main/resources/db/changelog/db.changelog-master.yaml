@@ -5,3 +5,7 @@ databaseChangeLog:
       file: classpath:db/changelog/changesets/1713451028-create-table-products.yml
   - include:
       file: classpath:db/changelog/changesets/1713451331-create-table-shopping_cart.yml
+  - include:
+      file: classpath:db/changelog/changesets/1721480090-add-auth_identifier-to-person-table.yml
+  - include:
+      file: classpath:db/changelog/changesets/1721480533-remove-birthdate-from-person-table.yml

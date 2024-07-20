@@ -281,8 +281,6 @@ public class DummyDataCommand implements ApplicationRunner {
         person.setFirstName("Alice");
         person.setLastName("Smith");
         person.setEmail("alice.smith@gmail.com");
-        person.setUsername("alice");
-        person.setBirthdate(LocalDate.parse("1990-11-21"));
         person.setRole(Role.CUSTOMER);
 
         return person;
@@ -293,8 +291,6 @@ public class DummyDataCommand implements ApplicationRunner {
         person.setFirstName("Bob");
         person.setLastName("Doe");
         person.setEmail("bob.d0e@gmail.com");
-        person.setUsername("bob");
-        person.setBirthdate(LocalDate.parse("1984-05-31"));
         person.setRole(Role.CUSTOMER);
 
         return person;
@@ -305,8 +301,6 @@ public class DummyDataCommand implements ApplicationRunner {
         person.setFirstName("Charlie");
         person.setLastName("Brown");
         person.setEmail("cb@peanuts.org");
-        person.setUsername("chalky");
-        person.setBirthdate(LocalDate.parse("2003-04-04"));
         person.setRole(Role.CUSTOMER);
 
         return person;
@@ -317,8 +311,6 @@ public class DummyDataCommand implements ApplicationRunner {
         person.setFirstName("David");
         person.setLastName("Miller");
         person.setEmail("miller@atandt.com");
-        person.setUsername("dmiller");
-        person.setBirthdate(LocalDate.parse("1967-07-12"));
         person.setRole(Role.CUSTOMER);
 
         return person;
@@ -329,8 +321,6 @@ public class DummyDataCommand implements ApplicationRunner {
         person.setFirstName("Eve");
         person.setLastName("Johnson");
         person.setEmail("eveve@yahoo.com");
-        person.setUsername("eveve");
-        person.setBirthdate(LocalDate.parse("1979-09-05"));
         person.setRole(Role.CUSTOMER);
 
         return person;
@@ -341,8 +331,6 @@ public class DummyDataCommand implements ApplicationRunner {
         person.setFirstName("Frank");
         person.setLastName("Miller");
         person.setEmail("fm@live.com");
-        person.setUsername("frank");
-        person.setBirthdate(LocalDate.parse("1989-12-31"));
         person.setRole(Role.CUSTOMER);
 
         return person;
@@ -353,8 +341,6 @@ public class DummyDataCommand implements ApplicationRunner {
         person.setFirstName("Grace");
         person.setLastName("Smith");
         person.setEmail("grace@smith.org");
-        person.setUsername("grace");
-        person.setBirthdate(LocalDate.parse("1995-02-14"));
         person.setRole(Role.CUSTOMER);
 
         return person;
@@ -365,8 +351,6 @@ public class DummyDataCommand implements ApplicationRunner {
         person.setFirstName("Henry");
         person.setLastName("Johnson");
         person.setEmail("johnson@ccc.org");
-        person.setUsername("henry");
-        person.setBirthdate(LocalDate.parse("1980-03-15"));
         person.setRole(Role.CUSTOMER);
 
         return person;
@@ -377,8 +361,6 @@ public class DummyDataCommand implements ApplicationRunner {
         person.setFirstName("Ivy");
         person.setLastName("Brown");
         person.setEmail("ivy@bridge.com");
-        person.setUsername("ivy");
-        person.setBirthdate(LocalDate.parse("1992-06-30"));
         person.setRole(Role.CUSTOMER);
 
         return person;
@@ -389,8 +371,6 @@ public class DummyDataCommand implements ApplicationRunner {
         person.setFirstName("Jack");
         person.setLastName("Sheppard");
         person.setEmail("jack@sheppard.com");
-        person.setUsername("jack");
-        person.setBirthdate(LocalDate.parse("1987-08-17"));
         person.setRole(Role.CUSTOMER);
 
         return person;

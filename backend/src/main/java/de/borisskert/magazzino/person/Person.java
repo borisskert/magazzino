@@ -3,8 +3,6 @@ package de.borisskert.magazzino.person;
 import de.borisskert.magazzino.security.Role;
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
-
 @Entity
 @Table(name = "person")
 public class Person {
@@ -12,26 +10,18 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String username;
     private String firstName;
     private String lastName;
     private String email;
-    private LocalDate birthdate;
 
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "VARCHAR(255)")
     private Role role;
 
+    private String authIdentifier;
+
     public Long getId() {
         return id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getFirstName() {
@@ -58,19 +48,72 @@ public class Person {
         this.email = email;
     }
 
-    public LocalDate getBirthdate() {
-        return birthdate;
-    }
-
-    public void setBirthdate(LocalDate birthday) {
-        this.birthdate = birthday;
-    }
-
     public Role getRole() {
         return role;
     }
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getAuthIdentifier() {
+        return authIdentifier;
+    }
+
+    public void setAuthIdentifier(String authIdentifier) {
+        this.authIdentifier = authIdentifier;
+    }
+
+    public void updateFrom(Person person) {
+        this.firstName = person.firstName;
+        this.lastName = person.lastName;
+        this.email = person.email;
+        this.role = person.role;
+        this.authIdentifier = person.authIdentifier;
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private final Person person = new Person();
+
+        private Builder() {
+        }
+
+        public Builder id(Long id) {
+            person.id = id;
+            return this;
+        }
+
+        public Builder firstName(String firstName) {
+            person.firstName = firstName;
+            return this;
+        }
+
+        public Builder lastName(String lastName) {
+            person.lastName = lastName;
+            return this;
+        }
+
+        public Builder email(String email) {
+            person.email = email;
+            return this;
+        }
+
+        public Builder role(Role role) {
+            person.role = role;
+            return this;
+        }
+
+        public Builder authIdentifier(String authIdentifier) {
+            person.authIdentifier = authIdentifier;
+            return this;
+        }
+
+        public Person build() {
+            return person;
+        }
     }
 }

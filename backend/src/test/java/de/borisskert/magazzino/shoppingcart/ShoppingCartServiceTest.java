@@ -131,12 +131,10 @@ class ShoppingCartServiceTest {
 
     private Person setupPerson() {
         Person person = new Person();
-        person.setUsername("johndoe");
         person.setFirstName("John");
         person.setLastName("Doe");
         person.setEmail("john.doe@gmail.com");
         person.setRole(Role.EMPLOYEE);
-        person.setBirthdate(LocalDate.parse("1980-11-15"));
 
         return personRepository.save(person);
     }

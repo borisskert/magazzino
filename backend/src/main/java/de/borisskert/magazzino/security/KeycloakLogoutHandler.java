@@ -25,6 +25,10 @@ public class KeycloakLogoutHandler implements LogoutHandler {
             HttpServletResponse response,
             Authentication auth
     ) {
+        if (auth == null) {
+            return;
+        }
+
         logoutFromKeycloak((OidcUser) auth.getPrincipal());
     }
 

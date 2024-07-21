@@ -1,7 +1,7 @@
 package de.borisskert.magazzino.security;
 
-import de.borisskert.magazzino.person.Person;
 import de.borisskert.magazzino.person.PersonService;
+import de.borisskert.magazzino.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
@@ -32,10 +32,10 @@ public class KeycloakAuthClientService implements OAuth2AuthorizedClientService 
     }
 
     private void saveOrUpdateUser(OAuth2AuthenticationToken principal) {
-        Person person = PersonOauth2Adapter.from(principal)
-                .toPerson();
+        User user = AuthenticationUserAdapter.from(principal)
+                .toUser();
 
-        personService.save(person);
+        personService.save(user);
     }
 
     @Override

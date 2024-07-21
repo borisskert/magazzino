@@ -3,10 +3,30 @@
   "realm": "magazzino",
   "displayName": "magazzino Realm",
   "enabled": true,
-  "authenticationFlows": [
-  ],
+  "registrationAllowed": true,
+  "registrationEmailAsUsername": true,
   "roles": {
     "realm": [
+      {
+        "name": "default-roles-magazzino",
+        "composite": true,
+        "composites": {
+          "realm": [
+            "offline_access",
+            "uma_authorization",
+            "customer"
+          ],
+          "client": {
+            "account": [
+              "view-profile",
+              "manage-account"
+            ]
+          }
+        },
+        "clientRole": false,
+        "containerId": "magazzino",
+        "attributes": {}
+      },
       {
         "name": "customer"
       },

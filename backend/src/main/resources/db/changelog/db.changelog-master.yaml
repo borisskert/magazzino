@@ -6,6 +6,6 @@ databaseChangeLog:
   - include:
       file: classpath:db/changelog/changesets/1713451331-create-table-shopping_cart.yml
   - include:
-      file: classpath:db/changelog/changesets/1721480090-add-auth_identifier-to-person-table.yml
+      file: classpath:db/changelog/changesets/1721480090-add-auth_identifier-and-last_login-to-person-table.yml
   - include:
-      file: classpath:db/changelog/changesets/1721480533-remove-birthdate-from-person-table.yml
+      file: classpath:db/changelog/changesets/1721480533-remove-birthdate-and-username-from-person-table.yml

@@ -3,6 +3,8 @@ package de.borisskert.magazzino.person;
 import de.borisskert.magazzino.security.Role;
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "person")
 public class Person {
@@ -19,6 +21,8 @@ public class Person {
     private Role role;
 
     private String authIdentifier;
+
+    private LocalDateTime lastLogin;
 
     public Long getId() {
         return id;
@@ -64,12 +68,16 @@ public class Person {
         this.authIdentifier = authIdentifier;
     }
 
+    public LocalDateTime getLastLogin() {
+        return lastLogin;
+    }
+
     public void updateFrom(Person person) {
         this.firstName = person.firstName;
         this.lastName = person.lastName;
         this.email = person.email;
         this.role = person.role;
-        this.authIdentifier = person.authIdentifier;
+        this.lastLogin = person.lastLogin;
     }
 
     public static Builder builder() {
@@ -109,6 +117,11 @@ public class Person {
 
         public Builder authIdentifier(String authIdentifier) {
             person.authIdentifier = authIdentifier;
+            return this;
+        }
+
+        public Builder lastLogin(LocalDateTime lastLogin) {
+            person.lastLogin = lastLogin;
             return this;
         }
 

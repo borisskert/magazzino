@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum Role implements GrantedAuthority {
-    ADMIN, EMPLOYEE, CUSTOMER, GUEST;
+    ADMIN, EMPLOYEE, CUSTOMER, ANONYMOUS;
 
     private static final Pattern GRANTED_AUTHORITY_ROLE_PATTERN = Pattern.compile("^ROLE_([A-Za-z]+)$");
 

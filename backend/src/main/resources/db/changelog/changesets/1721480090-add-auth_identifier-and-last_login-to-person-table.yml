@@ -12,3 +12,9 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     unique: true
+
+              - column:
+                  name: last_login
+                  type: timestamp
+                  constraints:
+                    nullable: false

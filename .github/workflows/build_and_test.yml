@@ -1,0 +1,44 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+    types:
+      - synchronize
+      - opened
+      - reopened
+      - ready_for_review
+
+jobs:
+  linux_build:
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Build artifacts
+        run: mvn -B clean verify -Pci
+
+  infra_tests:
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run integration tests
+        run: |
+          cd .test
+          docker compose up --build --abort-on-container-exit --renew-anon-volumes --force-recreate

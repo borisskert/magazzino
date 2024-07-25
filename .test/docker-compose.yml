@@ -28,7 +28,7 @@ services:
       SPRING_DATASOURCE_USERNAME: magazzino_user
       SPRING_DATASOURCE_PASSWORD: magazzino_pass
     healthcheck:
-      test: [ "CMD", "curl", "--fail", "--silent", "localhost:8080/actuator/health" ]
+      test: "echo -e 'GET /actuator/health HTTP/1.1\r\nHost: localhost\r\nUser-Agent: HealthCheck\r\nConnection: close\r\n\r\n' | nc localhost 8080 | grep -q 'HTTP/1.1 200'"
       interval: 1s
       retries: 100
       start_period: 0s
